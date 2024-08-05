@@ -15,6 +15,34 @@ const CARD_ITEM: CardInterface[] = [
     user: "Alice",
     quantity: 4,
   },
+  {
+    uri: "https://images.pexels.com/photos/3804408/pexels-photo-3804408.jpeg?auto=compress&cs=tinysrgb&w=600",
+    name: "history books",
+    rating: 4,
+    user: "Lance",
+    quantity: 10,
+  },
+  {
+    uri: "https://images.pexels.com/photos/7218517/pexels-photo-7218517.jpeg?auto=compress&cs=tinysrgb&w=600",
+    name: "printer",
+    rating: 4,
+    user: "Anas",
+    quantity: 1,
+  },
+  {
+    uri: "https://images.pexels.com/photos/268349/pexels-photo-268349.jpeg?auto=compress&cs=tinysrgb&w=600",
+    name: "notebook",
+    rating: 3,
+    user: "Alia",
+    quantity: 6,
+  },
+  {
+    uri: "https://images.pexels.com/photos/998591/pexels-photo-998591.jpeg?auto=compress&cs=tinysrgb&w=600",
+    name: "pen",
+    rating: 5,
+    user: "Ahmad",
+    quantity: 10,
+  },
 ];
 
 const CHAT_LIST: Chat[] = [

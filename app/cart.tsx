@@ -18,7 +18,7 @@ export default function CartScreen() {
   return (
     <Box mx="2">
       <FlatList
-        data={CART_LIST}
+        data={CART_LIST.slice(0, 3)}
         renderItem={({ item }) => <CartList {...item} />}
         ItemSeparatorComponent={() => <Box height="1" />}
       />

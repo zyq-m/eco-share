@@ -1,11 +1,14 @@
 import CardItem from "@/components/CardItem";
 import { CARD_ITEM } from "@/constants/Data";
+import { AntDesign } from "@expo/vector-icons";
 import {
   AspectRatio,
   Box,
+  Button,
   Center,
   FlatList,
   Heading,
+  Icon,
   Image,
   ScrollView,
   Text,
@@ -45,6 +48,12 @@ export default function HomeScreen() {
           <Text color="white" fontSize="lg">
             Turn Waste Into Solution
           </Text>
+          <Button
+            rightIcon={<Icon as={AntDesign} name="right" size="xs" />}
+            mt="3"
+          >
+            Try Now
+          </Button>
         </Center>
       </Box>
 
