@@ -37,7 +37,7 @@ function CartList(cart: Cart) {
             // isChecked={cart.isCheck}
           />
           <Heading fontSize="md" textTransform="capitalize">
-            {cart.item.user}
+            {cart.item.user?.name}
           </Heading>
         </HStack>
         <HStack space="4">

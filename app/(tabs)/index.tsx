@@ -25,6 +25,7 @@ export default function HomeScreen() {
         borderRadius="sm"
         overflow="hidden"
         position="relative"
+        mb="2"
       >
         <AspectRatio w="full">
           <Image
@@ -51,6 +52,7 @@ export default function HomeScreen() {
           <Button
             rightIcon={<Icon as={AntDesign} name="right" size="xs" />}
             mt="3"
+            px="5"
           >
             Try Now
           </Button>
@@ -64,9 +66,12 @@ export default function HomeScreen() {
         <FlatList
           style={{ columnGap: 200 }}
           data={CARD_ITEM}
-          renderItem={({ item }) => <CardItem {...item} />}
+          renderItem={({ item }) => (
+            <Box mb="3">
+              <CardItem {...item} />
+            </Box>
+          )}
           numColumns={2}
-          ItemSeparatorComponent={() => <Box height="3" />}
           columnWrapperStyle={{ justifyContent: "space-evenly" }}
         />
       </Box>

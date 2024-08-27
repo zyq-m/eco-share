@@ -10,6 +10,7 @@ export default function RootLayout() {
         <Stack.Screen name="cart" options={{ title: "My Carts" }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(chat)" options={{ headerShown: false }} />
+        <Stack.Screen name="(item)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </NativeBaseProvider>

@@ -1,4 +1,4 @@
-import { Box, FlatList, ScrollView } from "native-base";
+import { Box, FlatList } from "native-base";
 import CardItem from "@/components/CardItem";
 
 import { CARD_ITEM } from "@/constants/Data";
@@ -9,9 +9,12 @@ export default function SearchScreen() {
       <FlatList
         style={{ columnGap: 200 }}
         data={CARD_ITEM}
-        renderItem={({ item }) => <CardItem {...item} />}
+        renderItem={({ item }) => (
+          <Box mb="3">
+            <CardItem {...item} />
+          </Box>
+        )}
         numColumns={2}
-        ItemSeparatorComponent={() => <Box height="3" />}
         columnWrapperStyle={{ justifyContent: "space-evenly" }}
       />
     </Box>

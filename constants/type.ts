@@ -1,9 +1,15 @@
 interface CardInterface {
+  id: string;
   uri: string;
   name: string;
   rating: number;
-  user?: string;
+  user?: User;
   quantity: number;
+}
+
+interface User {
+  name: string;
+  avatar: string;
 }
 
 interface Chat {
