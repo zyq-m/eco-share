@@ -3,7 +3,6 @@ import {
   AspectRatio,
   ScrollView,
   Image,
-  Heading,
   Box,
   Avatar,
   Text,
