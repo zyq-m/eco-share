@@ -16,6 +16,7 @@ import { Cart } from "@/constants/type";
 import { CART_LIST } from "@/constants/Data";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
+import MapView from "react-native-maps";
 
 export default function ItemScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -36,12 +37,8 @@ export default function ItemScreen() {
           mb="3"
         />
       </AspectRatio>
-      <Box px="3">
-        <HStack alignItems="center" justifyContent="space-between">
-          <HStack space="1" alignItems="center" mb="3">
-            <Icon as={MaterialIcons} name="location-pin" />
-            <Text>Selangor - Bangi</Text>
-          </HStack>
+      <Box px="3" safeAreaBottom={3}>
+        <HStack justifyContent="flex-end">
           <Pressable>
             <Icon
               as={MaterialCommunityIcons}
@@ -81,6 +78,27 @@ export default function ItemScreen() {
           </Box>
 
           <Text fontWeight="medium">Pickup time: By arrangement</Text>
+
+          <Box>
+            <HStack justifyContent="space-between" alignItems="center" mb="1">
+              <Text>Location</Text>
+              <HStack space="1" alignItems="center">
+                <Icon as={MaterialIcons} name="location-pin" />
+                <Text>100m away</Text>
+              </HStack>
+            </HStack>
+            <Box overflow="hidden" borderRadius="md">
+              <MapView
+                style={{ width: "100%", height: 250 }}
+                initialRegion={{
+                  latitude: 5.33659,
+                  longitude: 103.141998,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+              />
+            </Box>
+          </Box>
         </VStack>
 
         <Button>Request This Item</Button>
