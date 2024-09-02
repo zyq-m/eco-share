@@ -61,7 +61,7 @@ export default function LoginScreen() {
           <Button
             mt="2"
             colorScheme="indigo"
-            onPress={() => router.replace("/(tabs)")}
+            onPress={() => router.replace("/(sidebar)/(tabs)")}
           >
             Sign in
           </Button>

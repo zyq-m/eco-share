@@ -17,7 +17,9 @@ export default function ItemLayout() {
     <Stack>
       <Stack.Screen
         name="[id]"
-        options={{ title: title.charAt(0).toUpperCase() + title.slice(1) }}
+        options={{
+          title: title.charAt(0).toUpperCase() + title.slice(1),
+        }}
       />
     </Stack>
   );

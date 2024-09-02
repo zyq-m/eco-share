@@ -89,7 +89,7 @@ export default function ItemScreen() {
             </HStack>
             <Box overflow="hidden" borderRadius="md">
               <MapView
-                style={{ width: "100%", height: 250 }}
+                style={{ width: "100%", height: 200 }}
                 initialRegion={{
                   latitude: 5.33659,
                   longitude: 103.141998,
