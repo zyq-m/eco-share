@@ -7,6 +7,7 @@ export default function SearchScreen() {
   return (
     <Box>
       <FlatList
+        mt="2"
         style={{ columnGap: 200 }}
         data={CARD_ITEM}
         renderItem={({ item }) => (

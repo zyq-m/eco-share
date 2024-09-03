@@ -72,12 +72,10 @@ export default function NewItemScreen() {
           <FormControl.Label>Title</FormControl.Label>
           <Input />
         </FormControl>
-
         <Box>
           <Text>Description</Text>
           <TextArea numberOfLines={2} autoCompleteType={undefined} />
         </Box>
-
         <Box>
           <Text mb="2">Category</Text>
           <HStack>
@@ -95,17 +93,14 @@ export default function NewItemScreen() {
             ))}
           </HStack>
         </Box>
-
         <Box>
           <Text>Condition</Text>
           <TextArea numberOfLines={2} autoCompleteType={undefined} />
         </Box>
-
         <FormControl>
           <FormControl.Label>Quantity</FormControl.Label>
           <Input keyboardType="numeric" />
         </FormControl>
-
         <Box>
           <Text>Location</Text>
           <Box overflow="hidden" borderRadius="md">
@@ -120,7 +115,6 @@ export default function NewItemScreen() {
             />
           </Box>
         </Box>
-
         <Select
           selectedValue={service}
           minWidth="200"
@@ -139,7 +133,6 @@ export default function NewItemScreen() {
           <Select.Item label="UI Designing" value="ui" />
           <Select.Item label="Backend Development" value="backend" />
         </Select>
-
         <Button>Add Item</Button>
       </VStack>
     </ScrollView>

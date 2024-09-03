@@ -13,9 +13,9 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Pressable } from "react-native";
 import { router } from "expo-router";
 
-export default function Profile() {
+export default function EditProfile() {
   return (
-    <VStack safeAreaTop={2} space="4">
+    <VStack safeArea={4} space="4">
       <Box background="white" px="4" py="6" rounded="sm" alignItems="center">
         <Avatar
           bg="purple.600"
@@ -31,12 +31,7 @@ export default function Profile() {
           Amin Ashraf
         </Heading>
         <Text color="gray.500">example@email.com</Text>
-        <Button
-          rounded="full"
-          px="6"
-          mt="4"
-          onPress={() => router.push(`/(profile)/${1}`)}
-        >
+        <Button rounded="full" px="6" mt="4">
           Edit profile
         </Button>
       </Box>
@@ -54,7 +49,7 @@ export default function Profile() {
             <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
           </HStack>
         </Pressable>
-        <Pressable onPress={() => router.push("/(profile)/changePassword")}>
+        <Pressable>
           <HStack justifyContent="space-between" alignItems="center">
             <HStack space="3" alignItems="center">
               <AntDesign name="eyeo" size={20} color="black" />
