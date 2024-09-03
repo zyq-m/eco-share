@@ -17,7 +17,7 @@ export default function AppLayout() {
       <Drawer.Screen
         name="listing"
         options={{
-          title: "My Listing",
+          title: "My Listings",
           drawerIcon: () => (
             <MaterialIcons name="list" size={24} color="black" />
           ),
