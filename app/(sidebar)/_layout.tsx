@@ -44,7 +44,7 @@ export default function AppLayout() {
       <Drawer.Screen
         name="helpCentre"
         options={{
-          title: "Help Centre",
+          title: "Guidelines",
           drawerIcon: () => (
             <MaterialIcons name="question-mark" size={24} color="black" />
           ),
