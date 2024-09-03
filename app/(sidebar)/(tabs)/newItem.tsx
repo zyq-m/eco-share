@@ -5,7 +5,6 @@ import {
   CheckIcon,
   FormControl,
   HStack,
-  Icon,
   Input,
   ScrollView,
   Select,
@@ -16,6 +15,7 @@ import {
 import MapView from "react-native-maps";
 import { Pressable } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import usePickImage from "@/hooks/usePickImage";
 
 type Category = {
   id: number;
@@ -26,6 +26,7 @@ type Category = {
 export default function NewItemScreen() {
   const [service, setService] = useState("");
   const [category, setCategory] = useState<Category[] | []>([]);
+  const { pickImage } = usePickImage();
 
   const oncategory = (id: number) => {
     setCategory((prev) => {
@@ -45,7 +46,7 @@ export default function NewItemScreen() {
     <ScrollView>
       <HStack background="white" p="3">
         <HStack alignItems="center" space={3}>
-          <Pressable>
+          <Pressable onPress={pickImage}>
             <VStack
               justifyContent="center"
               alignItems="center"
