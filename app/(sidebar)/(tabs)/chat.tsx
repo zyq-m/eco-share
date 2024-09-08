@@ -13,7 +13,7 @@ import {
 
 export default function ChatListScreen() {
   return (
-    <Box safeAreaTop={2}>
+    <Box>
       <FlatList
         data={CHAT_LIST}
         renderItem={({ item }) => <ChatList {...item} />}

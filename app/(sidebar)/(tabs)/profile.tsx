@@ -15,7 +15,7 @@ import { router } from "expo-router";
 
 export default function Profile() {
   return (
-    <VStack safeAreaTop={2} space="4">
+    <VStack space="4">
       <Box background="white" px="4" py="6" rounded="sm" alignItems="center">
         <Avatar
           bg="purple.600"
