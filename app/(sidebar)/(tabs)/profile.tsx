@@ -12,8 +12,27 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Pressable } from "react-native";
 import { router } from "expo-router";
+import { useEffect, useState } from "react";
+import { User } from "@/constants/type";
+import api from "@/utils/axios";
 
 export default function Profile() {
+  const [profile, setProfile] = useState<User>();
+
+  const fetchProfile = async () => {
+    try {
+      const profileRes = await api.get("/profile");
+      setProfile(profileRes.data);
+    } catch (error) {
+      // do popup
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
   return (
     <VStack space="4">
       <Box background="white" px="4" py="6" rounded="sm" alignItems="center">
@@ -22,15 +41,17 @@ export default function Profile() {
           alignSelf="center"
           size="xl"
           source={{
-            uri: "https://images.unsplash.com/photo-1510771463146-e89e6e86560e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80",
+            uri:
+              profile?.avatar ??
+              "https://images.unsplash.com/photo-1510771463146-e89e6e86560e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80",
           }}
         >
           RB
         </Avatar>
-        <Heading size="md" mt="2">
-          Amin Ashraf
+        <Heading textTransform="capitalize" size="md" mt="2">
+          {profile?.name}
         </Heading>
-        <Text color="gray.500">example@email.com</Text>
+        <Text color="gray.500">{profile?.email}</Text>
         <Button
           rounded="full"
           px="6"

@@ -1,3 +1,19 @@
+type ItemT = {
+  id: number;
+  email: string;
+  name: string;
+  category: string;
+  quantity: number;
+  condition: string | null;
+  expiry: Date | null;
+  location: {};
+  description: string | null;
+  timestamp: Date;
+  available: boolean;
+  images: { uri: string }[] | null;
+  user?: User;
+};
+
 interface CardInterface {
   id: string;
   uri: string;
@@ -7,10 +23,14 @@ interface CardInterface {
   quantity: number;
 }
 
-interface User {
-  name: string;
-  avatar: string;
-}
+type User = {
+  email: string;
+  name: string | null;
+  avatar: string | null;
+  timestamp: Date;
+  username: string;
+  phone: string | null;
+};
 
 interface Chat {
   name: string;
@@ -25,4 +45,4 @@ interface Cart {
   isCheck: boolean;
 }
 
-export { CardInterface, Chat, Cart };
+export { CardInterface, Chat, Cart, ItemT, User };

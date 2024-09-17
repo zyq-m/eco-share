@@ -1,17 +1,17 @@
-import { CardInterface } from "@/constants/type";
-import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { ItemT } from "@/constants/type";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Box, AspectRatio, HStack, Icon, Image, Text } from "native-base";
 import { Pressable } from "react-native";
 
-export default function CardItem(item: CardInterface) {
+export default function CardItem(item: ItemT) {
   return (
     <Box background="white" borderRadius="sm" overflow="hidden">
       <Pressable onPress={() => router.push(`/(item)/${item.id}`)}>
         <AspectRatio w="183">
           <Image
             source={{
-              uri: item.uri,
+              uri: item.images?.[0].uri,
             }}
             alt={item.name}
           />
@@ -20,7 +20,7 @@ export default function CardItem(item: CardInterface) {
           <Text textTransform="capitalize" mb="1">
             {item.name}
           </Text>
-          <HStack alignItems="center">
+          {/* <HStack alignItems="center">
             {[...Array(item.rating).keys()].map(() => (
               <Icon
                 as={MaterialIcons}
@@ -32,7 +32,7 @@ export default function CardItem(item: CardInterface) {
             <Text fontSize="11" ml="1" color="gray.400">
               ({item.rating})
             </Text>
-          </HStack>
+          </HStack> */}
           <HStack justifyContent="space-between">
             <Text fontSize="xs">Qty: {item.quantity}</Text>
             <Icon

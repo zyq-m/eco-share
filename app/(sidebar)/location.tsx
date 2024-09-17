@@ -1,8 +1,13 @@
+import useLocation from "@/hooks/useLocation";
 import { View, Text } from "native-base";
 import React from "react";
 import MapView from "react-native-maps";
 
 export default function Location() {
+  const { location, errorMsg } = useLocation();
+
+  console.log(location);
+
   return (
     <View>
       <MapView
