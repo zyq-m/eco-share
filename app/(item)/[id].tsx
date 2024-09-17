@@ -12,18 +12,31 @@ import {
   Icon,
 } from "native-base";
 import { useLocalSearchParams } from "expo-router";
-import { Cart } from "@/constants/type";
-import { CART_LIST } from "@/constants/Data";
+import { ItemT } from "@/constants/type";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import MapView from "react-native-maps";
+import api from "@/utils/axios";
+import { useNavigation } from "expo-router";
 
 export default function ItemScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [item, setItem] = useState<Cart>();
+  const [item, setItem] = useState<ItemT>();
+  const navigation = useNavigation();
+
+  const fetchItem = async () => {
+    try {
+      const itemRes = await api.get(`/item/${id}`);
+      setItem(itemRes.data);
+      navigation.setOptions({ title: itemRes.data.name });
+    } catch (error) {
+      // do popup
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    setItem(CART_LIST.filter((item) => item.item.id == id)[0]);
+    fetchItem();
   }, []);
 
   return (
@@ -31,7 +44,7 @@ export default function ItemScreen() {
       <AspectRatio>
         <Image
           source={{
-            uri: item?.item.uri,
+            uri: item?.images?.[0].uri,
           }}
           alt="View"
           mb="3"
@@ -51,8 +64,8 @@ export default function ItemScreen() {
 
         <HStack justifyContent="space-between" alignItems="center">
           <HStack space="2" alignItems={"center"} mb="4">
-            <Avatar size="sm" source={{ uri: item?.item.user?.avatar }} />
-            <Text>{item?.item.user?.name}</Text>
+            <Avatar size="sm" source={{ uri: item?.user?.avatar ?? "" }} />
+            <Text>{item?.user?.name}</Text>
           </HStack>
           <HStack space="1" alignItems="center" mb="3">
             <Icon as={MaterialCommunityIcons} name="clock-outline" />
@@ -63,18 +76,18 @@ export default function ItemScreen() {
         </HStack>
 
         <VStack space="6" mb="5">
-          <Text fontWeight="medium">{item?.item.quantity} item left</Text>
+          <Text fontWeight="medium">{item?.quantity} item left</Text>
 
-          <Text fontWeight="medium">Category: Others</Text>
+          <Text fontWeight="medium">Category: {item?.category}</Text>
 
           <Box>
             <Text fontWeight="medium">Description:</Text>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Architecto quia cum, voluptates molestiae magni facilis error. Non
-              accusamus ullam hic quaerat ad nulla, sunt, atque fugit illum eum,
-              tenetur incidunt?
-            </Text>
+            <Text>{item?.description}</Text>
+          </Box>
+
+          <Box>
+            <Text fontWeight="medium">Condition:</Text>
+            <Text>{item?.condition}</Text>
           </Box>
 
           <Text fontWeight="medium">Pickup time: By arrangement</Text>
