@@ -6,7 +6,7 @@ import { Pressable } from "react-native";
 
 export default function CardItem(item: ItemT) {
   return (
-    <Box background="white" borderRadius="sm" overflow="hidden">
+    <Box background="white" rounded="sm" overflow="hidden" mb="3">
       <Pressable onPress={() => router.push(`/(item)/${item.id}`)}>
         <AspectRatio w="183">
           <Image

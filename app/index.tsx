@@ -27,13 +27,14 @@ export default function LoginScreen() {
   const { email, setAuth } = useUserStore();
 
   const onLogin = handleSubmit(async (data) => {
+    router.replace("/(sidebar)/(tabs)");
+    return;
     try {
       const user = await api.post("/auth/login", data);
 
       setItem("accessToken", user.data.accessToken);
       setItem("refreshToken", user.data.refreshToken);
       setAuth(true); // set true
-      router.replace("/(sidebar)/(tabs)");
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,7 @@
 import { Drawer } from "expo-router/drawer";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Text } from "native-base";
 
 export default function AppLayout() {
   return (
@@ -24,15 +25,6 @@ export default function AppLayout() {
         }}
       />
       <Drawer.Screen
-        name="location"
-        options={{
-          title: "Location",
-          drawerIcon: () => (
-            <MaterialIcons name="location-on" size={24} color="black" />
-          ),
-        }}
-      />
-      <Drawer.Screen
         name="nearMe"
         options={{
           title: "Near me",
@@ -45,6 +37,24 @@ export default function AppLayout() {
         name="helpCentre"
         options={{
           title: "Guidelines",
+          drawerIcon: () => (
+            <MaterialIcons name="question-mark" size={24} color="black" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="aboutUs"
+        options={{
+          title: "About Us",
+          drawerIcon: () => (
+            <MaterialIcons name="question-mark" size={24} color="black" />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="termCondition"
+        options={{
+          title: "Terms & conditions",
           drawerIcon: () => (
             <MaterialIcons name="question-mark" size={24} color="black" />
           ),

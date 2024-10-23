@@ -56,13 +56,13 @@ export default function Profile() {
           rounded="full"
           px="6"
           mt="4"
-          onPress={() => router.push(`/(profile)/${1}`)}
+          // onPress={() => router.push(`/(profile)/${1}`)}
         >
           Edit profile
         </Button>
       </Box>
       <VStack background="white" px="5" py="6" rounded="sm" space="8">
-        <Pressable onPress={() => router.push("/(sidebar)/listing")}>
+        <Pressable onPress={() => router.push("/(item)/requestList")}>
           <HStack justifyContent="space-between" alignItems="center">
             <HStack space="3" alignItems="center">
               <MaterialIcons
@@ -70,7 +70,7 @@ export default function Profile() {
                 size={20}
                 color="black"
               />
-              <Text>My Listings</Text>
+              <Text>Request Lists</Text>
             </HStack>
             <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
           </HStack>

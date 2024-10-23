@@ -23,18 +23,15 @@ export default function SearchScreen() {
   }, []);
 
   return (
-    <Box>
+    <Box safeAreaTop={2} safeAreaX={2}>
       <FlatList
-        mt="2"
-        style={{ columnGap: 200 }}
         data={items}
-        renderItem={({ item }) => (
-          <Box mb="3">
-            <CardItem {...item} />
-          </Box>
-        )}
+        renderItem={({ item }) => <CardItem {...item} />}
+        keyExtractor={(item) => JSON.stringify(item.id)}
         numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-evenly" }}
+        columnWrapperStyle={{
+          justifyContent: !items.length ? "flex-start" : "space-between",
+        }}
       />
     </Box>
   );

@@ -14,16 +14,17 @@ import {
   VStack,
   WarningOutlineIcon,
 } from "native-base";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { Pressable } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import usePickImage, { ImageT } from "@/hooks/usePickImage";
 import { useForm, Controller } from "react-hook-form";
 import api from "@/utils/axios";
 import dayjs from "dayjs";
-import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 import { InterfaceInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
 import { router } from "expo-router";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { LocationT, useLocationStore } from "@/store/store";
 
 type ItemForm = {
   name: string;
@@ -33,7 +34,7 @@ type ItemForm = {
   expiry: string | Date;
   category: string;
   images?: ImageT[];
-  location?: {};
+  location?: LocationT | null;
 };
 
 const listOption = [
@@ -59,6 +60,7 @@ const categoryOption = [{ label: "Food", value: "food" }];
 
 export default function NewItemScreen() {
   const { pickImage, images, clear } = usePickImage();
+  const { location } = useLocationStore();
 
   const {
     control,
@@ -85,7 +87,7 @@ export default function NewItemScreen() {
       }
 
       data.images = images.map((img) => ({ name: img.name }));
-      data.location = { name: "test" };
+      data.location = location;
       data.expiry = new Date(data.expiry);
       const newItem = await api.post("/item", data);
 
@@ -252,17 +254,25 @@ export default function NewItemScreen() {
           />
         </Box>
         <Box>
-          <Text>Location</Text>
+          <Pressable onPress={() => router.push("/(item)/location")}>
+            <HStack py="4" alignItems="center" justifyContent="space-between">
+              <Text>Set your location</Text>
+              <MaterialIcons name="navigate-next" size={24} color="black" />
+            </HStack>
+          </Pressable>
           <Box overflow="hidden" borderRadius="md">
             <MapView
+              showsUserLocation
               style={{ width: "100%", height: 200 }}
               initialRegion={{
-                latitude: 5.33659,
-                longitude: 103.141998,
+                latitude: location?.latitude ?? 5.33659,
+                longitude: location?.longitude ?? 103.141998,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
-            />
+            >
+              {location && <Marker coordinate={{ ...location }} />}
+            </MapView>
           </Box>
         </Box>
         <Button onPress={addItem}>Add Item</Button>
@@ -295,70 +305,3 @@ function FormInput({
     </FormControl>
   );
 }
-
-// import { useState } from "react";
-// import { Button, Image, View, StyleSheet } from "react-native";
-// import * as ImagePicker from "expo-image-picker";
-// import api from "@/utils/axios";
-
-// export default function ImagePickerExample() {
-//   const [photo, setPhoto] = useState<any>(null);
-
-//   const upload = async () => {
-//     console.log(photo);
-//     const fd = new FormData();
-//     fd.append("p", photo);
-//     try {
-//       const upload = await api.post("/item", fd, {
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "multipart/form-data",
-//         },
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   const pickImage = async () => {
-//     // No permissions request is necessary for launching the image library
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//       aspect: [4, 3],
-//       quality: 1,
-//       allowsMultipleSelection: true,
-//     });
-
-//     if (!result.canceled) {
-//       setPhoto((prev) => [
-//         ...prev,
-//         {
-//           uri: result.assets[0].uri,
-//           type: result.assets[0].mimeType,
-//           name:
-//             result.assets[0].uri.split("/").pop() ?? result.assets[0].fileName,
-//         },
-//       ]);
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Button title="Pick an image from camera roll" onPress={pickImage} />
-//       {photo && <Image source={{ uri: photo.uri }} style={styles.image} />}
-//       <Button title="Upload" onPress={upload} />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-//   image: {
-//     width: 200,
-//     height: 200,
-//   },
-// });

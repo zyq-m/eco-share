@@ -1,15 +1,14 @@
-import CardItem from "@/components/CardItem";
-import { CARD_ITEM } from "@/constants/Data";
 import { AntDesign } from "@expo/vector-icons";
+import { router } from "expo-router";
 import {
   AspectRatio,
   Box,
   Button,
   Center,
-  FlatList,
   Heading,
   Icon,
   Image,
+  Pressable,
   ScrollView,
   Text,
 } from "native-base";
@@ -19,7 +18,6 @@ export default function HomeScreen() {
     <ScrollView>
       <Box
         bg="white"
-        mx="2"
         rounded="sm"
         alignItems="center"
         borderRadius="sm"
@@ -44,10 +42,10 @@ export default function HomeScreen() {
           bg="rgba(0, 0, 0, 0.27)"
         >
           <Heading color="white" fontSize="4xl">
-            Eco-Share
+            Rebound
           </Heading>
           <Text color="white" fontSize="lg">
-            Turn Waste Into Solution
+            Make Every Bite Count
           </Text>
           <Button
             rightIcon={<Icon as={AntDesign} name="right" size="xs" />}
@@ -59,21 +57,21 @@ export default function HomeScreen() {
         </Center>
       </Box>
 
-      <Box backgroundColor="warmGray.100" py="4">
-        <Heading mx="2" mb="4" fontSize="md" textTransform="uppercase">
-          Recomended for you
+      <Box safeAreaX={2} backgroundColor="warmGray.100" py="4">
+        <Heading mb="4" fontSize="md" textTransform="uppercase">
+          Category
         </Heading>
-        <FlatList
-          style={{ columnGap: 200 }}
-          data={CARD_ITEM}
-          renderItem={({ item }) => (
-            <Box mb="3">
-              <CardItem {...item} />
-            </Box>
-          )}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent: "space-evenly" }}
-        />
+        <Pressable onPress={() => router.push("/(sidebar)/(tabs)/search")}>
+          <AspectRatio width="183">
+            <Image
+              rounded="md"
+              source={{
+                uri: "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&w=600",
+              }}
+              alt="Food"
+            />
+          </AspectRatio>
+        </Pressable>
       </Box>
     </ScrollView>
   );

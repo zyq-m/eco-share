@@ -1,3 +1,4 @@
+import { LocationObject } from "expo-location";
 import { create } from "zustand";
 
 type UserStore = {
@@ -14,4 +15,16 @@ const useUserStore = create<UserStore>()((set) => ({
   setAuth: (isAuth: boolean) => set(() => ({ isAuth: isAuth })),
 }));
 
-export { useUserStore };
+export type LocationT = { latitude: number; longitude: number };
+
+type LocationStore = {
+  location: LocationT | null;
+  setLocation: (location: LocationT | null) => void;
+};
+
+const useLocationStore = create<LocationStore>()((set) => ({
+  location: null,
+  setLocation: (location) => set(() => ({ location: location })),
+}));
+
+export { useUserStore, useLocationStore };

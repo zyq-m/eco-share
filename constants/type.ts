@@ -1,3 +1,5 @@
+import { LocationT } from "@/store/store";
+
 type ItemT = {
   id: number;
   email: string;
@@ -6,9 +8,9 @@ type ItemT = {
   quantity: number;
   condition: string | null;
   expiry: Date | null;
-  location: {};
+  location: LocationT | null;
   description: string | null;
-  timestamp: Date;
+  timestamp: Date | string;
   available: boolean;
   images: { uri: string }[] | null;
   user?: User;
