@@ -1,9 +1,12 @@
 import {
+	Alert,
 	Box,
 	Button,
 	CheckIcon,
+	CloseIcon,
 	FormControl,
 	HStack,
+	IconButton,
 	Image,
 	Input,
 	ScrollView,
@@ -11,6 +14,8 @@ import {
 	Stack,
 	Text,
 	TextArea,
+	Toast,
+	useToast,
 	VStack,
 	WarningOutlineIcon,
 } from "native-base";
@@ -67,6 +72,7 @@ export default function NewItemScreen() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm<ItemForm>();
+	const toast = useToast();
 
 	const addItem = handleSubmit(async (data) => {
 		try {
@@ -81,8 +87,11 @@ export default function NewItemScreen() {
 				},
 			});
 
-			if (uploadImages.status != 201) {
-				// handle failed upload
+			if (!uploadImages.data) {
+				toast.show({
+					placement: "top",
+					description: "Failed to upload",
+				});
 				return;
 			}
 
@@ -91,10 +100,70 @@ export default function NewItemScreen() {
 			data.expiry = new Date(data.expiry);
 			const newItem = await api.post("/item", data);
 
+			toast.show({
+				placement: "top",
+				render: () => (
+					<Alert w="98%" status="success" mx="auto">
+						<VStack space={2} flexShrink={1} w="100%">
+							<HStack
+								flexShrink={1}
+								space={1}
+								alignItems="center"
+								justifyContent="space-between"
+							>
+								<HStack
+									space={2}
+									flexShrink={1}
+									alignItems="center"
+								>
+									<Alert.Icon />
+									<Text
+										fontSize="md"
+										fontWeight="medium"
+										_dark={{
+											color: "coolGray.800",
+										}}
+									>
+										Item added!
+									</Text>
+								</HStack>
+								<IconButton
+									variant="unstyled"
+									_focus={{
+										borderWidth: 0,
+									}}
+									icon={<CloseIcon size="3" />}
+									_icon={{
+										color: "coolGray.600",
+									}}
+									onPress={() => toast.closeAll()}
+								/>
+							</HStack>
+							<Box
+								pl="6"
+								_dark={{
+									_text: {
+										color: "coolGray.600",
+									},
+								}}
+							>
+								New item added. Thanks for posting your item.
+								Keep giving to community.
+							</Box>
+						</VStack>
+					</Alert>
+				),
+			});
+			//? Suggestion: put into component
+
 			router.push("/(sidebar)/(tabs)/");
 			clear();
 		} catch (error) {
 			console.log(error);
+			toast.show({
+				placement: "top",
+				description: "Failed to upload",
+			});
 		}
 	});
 
