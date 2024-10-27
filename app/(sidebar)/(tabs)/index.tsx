@@ -13,7 +13,6 @@ import {
 	Image,
 	Pressable,
 	ScrollView,
-	Spacer,
 	Text,
 } from "native-base";
 import { useEffect, useState } from "react";
