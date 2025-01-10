@@ -7,10 +7,8 @@ import {
 	Avatar,
 	Text,
 	HStack,
-	Button,
 	VStack,
 	Icon,
-	Modal,
 	Pressable,
 } from "native-base";
 import { router, useLocalSearchParams } from "expo-router";
@@ -22,14 +20,12 @@ import { useNavigation } from "expo-router";
 import dayjs from "dayjs";
 import relativetime from "dayjs/plugin/relativeTime";
 import { useLocationStore } from "@/store/store";
+import ConfirmationModal from "@/components/RequestConfirmation";
 
 export default function ItemScreen() {
 	const { id } = useLocalSearchParams<{ id: string }>();
 	const [item, setItem] = useState<ItemT>();
 	const navigation = useNavigation();
-	const [isSubmit, setIsSubmit] = useState(false);
-	const [showModal, setShowModal] = useState(false);
-	const [quantity, setQuantity] = useState(1);
 	const { location, setLocation } = useLocationStore();
 
 	const fetchItem = async () => {
@@ -49,31 +45,10 @@ export default function ItemScreen() {
 		}
 	};
 
-	const onRequest = async () => {
-		setIsSubmit(true);
-		try {
-			const item = await api.post(`/item/${id}`, { quantity });
-
-			router.push("/(sidebar)/(tabs)/search");
-		} catch (error) {
-			console.log(error);
-		}
-		// setShowModal(false);
-		setIsSubmit(false);
-	};
-
-	const onQuantity = (number: number) => {
-		setQuantity((prev) => {
-			let tmp = prev + number;
-			if (item && tmp >= item.quantity && tmp <= 0) return prev + number;
-			return prev;
-		});
-	};
-
 	useEffect(() => {
 		dayjs.extend(relativetime);
 		fetchItem();
-	}, []);
+	}, [id]);
 
 	return (
 		<ScrollView>
@@ -140,13 +115,6 @@ export default function ItemScreen() {
 					<Text fontWeight="medium">Pickup time: By arrangement</Text>
 
 					<Box>
-						{/* <HStack justifyContent="space-between" alignItems="center" mb="1">
-              <Text>Location</Text>
-              <HStack space="1" alignItems="center">
-                <Icon as={MaterialIcons} name="location-pin" />
-                <Text>100m away</Text>
-              </HStack>
-            </HStack> */}
 						<Pressable
 							onPress={() => router.push("/(item)/location")}
 						>
@@ -182,49 +150,8 @@ export default function ItemScreen() {
 						</Box>
 					</Box>
 				</VStack>
-
-				<Button
-					isDisabled={!item?.available}
-					onPress={() => setShowModal(true)}
-				>
-					Request This Item
-				</Button>
+				{item && <ConfirmationModal item={item} id={id} />}
 			</Box>
-			<Modal isOpen={showModal}>
-				<Modal.Content maxWidth="400px">
-					<Modal.CloseButton onPress={() => setShowModal(false)} />
-					<Modal.Header>Item</Modal.Header>
-					<Modal.Body>
-						<HStack
-							alignItems="center"
-							justifyContent="space-between"
-						>
-							<Text>Quantity</Text>
-							<Button.Group
-								variant="outline"
-								isAttached
-								size="sm"
-							>
-								<Button onPress={() => onQuantity(-1)}>
-									-
-								</Button>
-								<Button disabled>{quantity}</Button>
-								<Button onPress={() => onQuantity(1)}>+</Button>
-							</Button.Group>
-						</HStack>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							flex="1"
-							isLoadingText="Confirm"
-							isLoading={isSubmit}
-							onPress={onRequest}
-						>
-							Confirm
-						</Button>
-					</Modal.Footer>
-				</Modal.Content>
-			</Modal>
 		</ScrollView>
 	);
 }

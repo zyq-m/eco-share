@@ -30,12 +30,6 @@ export default function SearchScreen() {
 				data={items}
 				renderItem={({ item }) => <CardItem {...item} />}
 				keyExtractor={(item) => JSON.stringify(item.id)}
-				numColumns={2}
-				columnWrapperStyle={{
-					justifyContent: !items.length
-						? "flex-start"
-						: "space-between",
-				}}
 			/>
 		</Box>
 	);

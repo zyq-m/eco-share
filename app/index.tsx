@@ -13,7 +13,7 @@ import { Link, router } from "expo-router";
 import { useUserStore } from "@/store/store";
 import { useForm, Controller } from "react-hook-form";
 import { useEffect } from "react";
-import { getItem, setItem } from "expo-secure-store";
+import { setItem } from "expo-secure-store";
 
 import api from "@/utils/axios";
 
