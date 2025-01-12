@@ -9,7 +9,6 @@ import {
 	Image,
 	Text,
 	Button,
-	Spacer,
 } from "native-base";
 import { Pressable } from "react-native";
 

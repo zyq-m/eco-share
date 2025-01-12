@@ -1,12 +1,14 @@
+import CardItem from "@/components/CardItem";
+import { ItemT } from "@/constants/type";
 import api from "@/utils/axios";
 import { AntDesign } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import { router } from "expo-router";
 import {
 	AspectRatio,
 	Box,
 	Button,
 	Center,
-	FlatList,
 	Flex,
 	Heading,
 	Icon,
@@ -14,6 +16,7 @@ import {
 	Pressable,
 	ScrollView,
 	Text,
+	VStack,
 } from "native-base";
 import { useEffect, useState } from "react";
 
@@ -26,15 +29,26 @@ type CategoryT = {
 export default function HomeScreen() {
 	const [category, setCategory] = useState<CategoryT[]>([]);
 
+	const [items, setItems] = useState<ItemT[]>([]);
+	const isFocused = useIsFocused();
+
+	const fetchItems = async () => {
+		try {
+			const [itemRes, categoryRes] = await Promise.all([
+				api.get("/item"),
+				api.get("/category"),
+			]);
+			setItems(itemRes.data);
+			setCategory(categoryRes.data);
+		} catch (error) {
+			// do popup
+			console.log(error);
+		}
+	};
+
 	useEffect(() => {
-		api.get("/category")
-			.then((res) => {
-				setCategory(res.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
+		isFocused && fetchItems();
+	}, [isFocused]);
 
 	return (
 		<ScrollView>
@@ -50,7 +64,7 @@ export default function HomeScreen() {
 				<AspectRatio w="full">
 					<Image
 						source={{
-							uri: "https://images.pexels.com/photos/262488/pexels-photo-262488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+							uri: "https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 						}}
 						alt=""
 					/>
@@ -67,7 +81,7 @@ export default function HomeScreen() {
 						Rebound
 					</Heading>
 					<Text color="white" fontSize="lg">
-						Make Every Bite Count
+						Turning Surplus Into a Sustainable Cycle
 					</Text>
 					<Button
 						rightIcon={
@@ -81,13 +95,18 @@ export default function HomeScreen() {
 				</Center>
 			</Box>
 
-			<Box safeAreaX={2} backgroundColor="warmGray.100" py="4">
-				<Heading mb="4" fontSize="md" textTransform="uppercase">
-					Category
-				</Heading>
-				<Flex direction="row" wrap="wrap" justify="space-between">
-					{category?.map((c) => (
-						<>
+			<VStack
+				safeAreaX={2}
+				backgroundColor="warmGray.100"
+				py="4"
+				space="6"
+			>
+				<Box>
+					<Heading mb="4" fontSize="md" textTransform="uppercase">
+						Category
+					</Heading>
+					<Flex direction="row" wrap="wrap" justify="space-between">
+						{category?.map((c) => (
 							<Pressable
 								key={c.id}
 								onPress={() =>
@@ -106,10 +125,19 @@ export default function HomeScreen() {
 								</AspectRatio>
 								<Text>{c.name}</Text>
 							</Pressable>
-						</>
+						))}
+					</Flex>
+				</Box>
+
+				<Box>
+					<Heading mb="4" fontSize="md" textTransform="uppercase">
+						Suggested
+					</Heading>
+					{items?.map((item) => (
+						<CardItem {...item} key={item.id} />
 					))}
-				</Flex>
-			</Box>
+				</Box>
+			</VStack>
 		</ScrollView>
 	);
 }
