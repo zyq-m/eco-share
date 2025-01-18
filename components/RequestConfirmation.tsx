@@ -3,7 +3,19 @@ import { router } from "expo-router";
 import React, { useState } from "react";
 import { ItemT } from "@/constants/type";
 
-import { Box, Text, HStack, Button, VStack, Modal, Heading } from "native-base";
+import {
+	Box,
+	Text,
+	HStack,
+	Button,
+	VStack,
+	Modal,
+	Heading,
+	useToast,
+	Alert,
+	IconButton,
+	CloseIcon,
+} from "native-base";
 
 export default function ConfirmationModal({
 	item,
@@ -16,25 +28,80 @@ export default function ConfirmationModal({
 	const [showModal, setShowModal] = useState(false);
 	const [showModal2, setShowModal2] = useState(false);
 	const [quantity, setQuantity] = useState(1);
+	const toast = useToast();
 
 	const onRequest = async () => {
 		setIsSubmit(true);
-		// try {
-		// 	await api.post(`/item/${id}`, { quantity });
+		try {
+			await api.post(`/item/${id}`, { quantity });
 
-		router.navigate({
-			pathname: `/(chat)/${item.user?.name}`,
-			params: {
-				image: `${process.env.EXPO_PUBLIC_API_URL}/${item.images?.[0].uri}`,
-				name: item.name,
-			},
-		});
-		setIsSubmit(false);
-		setShowModal(false);
-		setShowModal2(false);
-		// } catch (error) {
-		// 	console.log(error);
-		// }
+			toast.show({
+				placement: "top",
+				render: () => (
+					<Alert w="98%" status="success" mx="auto">
+						<VStack space={2} flexShrink={1} w="100%">
+							<HStack
+								flexShrink={1}
+								space={1}
+								alignItems="center"
+								justifyContent="space-between"
+							>
+								<HStack
+									space={2}
+									flexShrink={1}
+									alignItems="center"
+								>
+									<Alert.Icon />
+									<Text
+										fontSize="md"
+										fontWeight="medium"
+										_dark={{
+											color: "coolGray.800",
+										}}
+									>
+										Item added!
+									</Text>
+								</HStack>
+								<IconButton
+									variant="unstyled"
+									_focus={{
+										borderWidth: 0,
+									}}
+									icon={<CloseIcon size="3" />}
+									_icon={{
+										color: "coolGray.600",
+									}}
+									onPress={() => toast.closeAll()}
+								/>
+							</HStack>
+							<Box
+								pl="6"
+								_dark={{
+									_text: {
+										color: "coolGray.600",
+									},
+								}}
+							>
+								New item added to your request cart.
+							</Box>
+						</VStack>
+					</Alert>
+				),
+			});
+
+			router.navigate({
+				pathname: `/(chat)/${item.user?.name}`,
+				params: {
+					image: `${process.env.EXPO_PUBLIC_API_URL}/${item.images?.[0].uri}`,
+					name: item.name,
+				},
+			});
+			setIsSubmit(false);
+			setShowModal(false);
+			setShowModal2(false);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const onQuantity = (number: number) => {

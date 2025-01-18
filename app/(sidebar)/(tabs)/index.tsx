@@ -139,11 +139,7 @@ export default function HomeScreen() {
 					<Heading mb="4" fontSize="md" textTransform="uppercase">
 						Suggested
 					</Heading>
-					<VStack space="2">
-						{items?.map((item) => (
-							<CardItem key={item.id} {...item} />
-						))}
-					</VStack>
+					<CardItem items={items} />
 				</Box>
 			</VStack>
 		</ScrollView>

@@ -42,7 +42,7 @@ export default function SearchScreen() {
 
 	return (
 		<Box safeAreaTop={2} safeAreaX={2}>
-			<ScrollView mb="4">
+			<ScrollView>
 				<ScrollView horizontal>
 					<Button.Group mt="2" mb="4">
 						{category?.map((cat) => (
@@ -60,11 +60,7 @@ export default function SearchScreen() {
 						))}
 					</Button.Group>
 				</ScrollView>
-				<VStack space="2">
-					{items?.map((item) => (
-						<CardItem key={item.id} {...item} />
-					))}
-				</VStack>
+				<CardItem items={items} />
 			</ScrollView>
 		</Box>
 	);
