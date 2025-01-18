@@ -70,6 +70,7 @@ export default function NewItemScreen() {
 	const {
 		control,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm<ItemForm>();
 	const toast = useToast();
@@ -158,6 +159,7 @@ export default function NewItemScreen() {
 
 			router.push("/(sidebar)/(tabs)/");
 			clear();
+			reset();
 		} catch (error) {
 			console.log(error);
 			toast.show({
@@ -169,7 +171,7 @@ export default function NewItemScreen() {
 
 	return (
 		<ScrollView>
-			<ScrollView horizontal>
+			<ScrollView horizontal={images.length > 1}>
 				<HStack background="white" px="4" py="5" space="4">
 					<HStack alignItems="center" space={3}>
 						<Pressable onPress={pickImage}>

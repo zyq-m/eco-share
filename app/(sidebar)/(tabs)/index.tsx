@@ -34,12 +34,13 @@ export default function HomeScreen() {
 
 	const fetchItems = async () => {
 		try {
-			const [itemRes, categoryRes] = await Promise.all([
-				api.get("/item"),
+			const [itemRes, categoryRes] = await Promise.allSettled([
+				api.get("/item", { params: { take: 3 } }),
 				api.get("/category"),
 			]);
-			setItems(itemRes.data);
-			setCategory(categoryRes.data);
+			itemRes.status == "fulfilled" && setItems(itemRes.value.data);
+			categoryRes.status == "fulfilled" &&
+				setCategory(categoryRes.value.data);
 		} catch (error) {
 			// do popup
 			console.log(error);
@@ -59,7 +60,7 @@ export default function HomeScreen() {
 				borderRadius="sm"
 				overflow="hidden"
 				position="relative"
-				mb="2"
+				mb="4"
 			>
 				<AspectRatio w="full">
 					<Image
@@ -110,7 +111,12 @@ export default function HomeScreen() {
 							<Pressable
 								key={c.id}
 								onPress={() =>
-									router.push("/(sidebar)/(tabs)/search")
+									router.navigate({
+										pathname: "/(sidebar)/(tabs)/search",
+										params: {
+											categoryId: c.id,
+										},
+									})
 								}
 								mb={2}
 							>
@@ -133,9 +139,11 @@ export default function HomeScreen() {
 					<Heading mb="4" fontSize="md" textTransform="uppercase">
 						Suggested
 					</Heading>
-					{items?.map((item) => (
-						<CardItem {...item} key={item.id} />
-					))}
+					<VStack space="2">
+						{items?.map((item) => (
+							<CardItem key={item.id} {...item} />
+						))}
+					</VStack>
 				</Box>
 			</VStack>
 		</ScrollView>

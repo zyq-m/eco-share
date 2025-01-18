@@ -1,10 +1,5 @@
 import { LocationT } from "@/store/store";
 
-type CategoryT = {
-	id: string | number;
-	name: string;
-};
-
 type ItemT = {
 	id: number;
 	email: string;
@@ -52,4 +47,10 @@ interface Cart {
 	isCheck: boolean;
 }
 
-export { CardInterface, Chat, Cart, ItemT, User };
+type CategoryT = {
+	id: string;
+	name: string;
+	image?: string;
+};
+
+export { CardInterface, Chat, Cart, ItemT, User, CategoryT };

@@ -14,14 +14,7 @@ import { Pressable } from "react-native";
 
 export default function CardItem(item: ItemT) {
 	return (
-		<Box
-			background="white"
-			py="2"
-			px="3"
-			rounded="sm"
-			overflow="hidden"
-			mb="3"
-		>
+		<Box background="white" py="2" px="3" rounded="sm" overflow="hidden">
 			<Pressable>
 				<HStack space="2">
 					<AspectRatio w="170">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Actionsheet,
 	Box,
@@ -21,6 +21,18 @@ export default function HomeHeader() {
 	const route = useRoute();
 	const { isOpen, onOpen, onClose } = useDisclose();
 
+	const [searchText, setSearchText] = useState("");
+
+	function handleSearch() {
+		router.navigate({
+			pathname: "/(sidebar)/(tabs)/search",
+			params: {
+				name: searchText,
+			},
+		});
+		setSearchText("");
+	}
+
 	return (
 		<Box safeAreaTop bg="primary.500">
 			<HStack bg="primary.500" px="1" py="3" alignItems="center">
@@ -42,6 +54,8 @@ export default function HomeHeader() {
 					variant="rounded"
 					backgroundColor="white"
 					placeholder="Search"
+					value={searchText}
+					onChangeText={setSearchText}
 					InputRightElement={
 						<Icon
 							as={AntDesign}
@@ -50,6 +64,7 @@ export default function HomeHeader() {
 							color="muted.400"
 						/>
 					}
+					onSubmitEditing={handleSearch}
 				/>
 				{route.name !== "search" ? (
 					<>

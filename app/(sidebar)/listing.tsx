@@ -1,11 +1,13 @@
 import CardItem from "@/components/CardItem";
 import { ItemT } from "@/constants/type";
 import api from "@/utils/axios";
+import { useIsFocused } from "@react-navigation/native";
 import { Box, FlatList } from "native-base";
 import React, { useEffect, useState } from "react";
 
 export default function Listing() {
 	const [items, setItems] = useState<ItemT[]>([]);
+	const isFocused = useIsFocused();
 
 	const fetchItems = async () => {
 		try {
@@ -19,8 +21,8 @@ export default function Listing() {
 	};
 
 	useEffect(() => {
-		fetchItems();
-	}, []);
+		isFocused && fetchItems();
+	}, [isFocused]);
 
 	return (
 		<Box safeAreaTop={2} safeAreaX={2}>

@@ -22,7 +22,13 @@ export default function ConfirmationModal({
 		// try {
 		// 	await api.post(`/item/${id}`, { quantity });
 
-		router.push("/(sidebar)/(tabs)/chat");
+		router.navigate({
+			pathname: `/(chat)/${item.user?.name}`,
+			params: {
+				image: `${process.env.EXPO_PUBLIC_API_URL}/${item.images?.[0].uri}`,
+				name: item.name,
+			},
+		});
 		setIsSubmit(false);
 		setShowModal(false);
 		setShowModal2(false);
