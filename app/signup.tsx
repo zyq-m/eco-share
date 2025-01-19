@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   FormControl,
@@ -10,12 +10,12 @@ import {
   Heading,
   VStack,
   ScrollView,
-} from "native-base";
-import { InterfaceInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
-import { useForm, Controller } from "react-hook-form";
-import api from "@/utils/axios";
-import { useUserStore } from "@/store/store";
-import { router } from "expo-router";
+} from 'native-base';
+import { InterfaceInputProps } from 'native-base/lib/typescript/components/primitives/Input/types';
+import { useForm, Controller } from 'react-hook-form';
+import api from '@/utils/axios';
+import { useUserStore } from '@/store/store';
+import { router } from 'expo-router';
 
 type SignUpForm = {
   username: string;
@@ -31,10 +31,10 @@ export default function SignUp() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const newUser = await api.post("/auth/sign-up", data);
+      const newUser = await api.post('/auth/sign-up', data);
 
       setEmail(newUser.data.email);
-      router.push("/");
+      router.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +47,7 @@ export default function SignUp() {
           size="lg"
           color="coolGray.800"
           _dark={{
-            color: "warmGray.50",
+            color: 'warmGray.50',
           }}
           fontWeight="semibold"
         >
@@ -57,7 +57,7 @@ export default function SignUp() {
           mt="1"
           color="coolGray.600"
           _dark={{
-            color: "warmGray.200",
+            color: 'warmGray.200',
           }}
           fontWeight="medium"
           size="xs"
@@ -72,7 +72,7 @@ export default function SignUp() {
               <FormInput
                 label="Username"
                 options={{
-                  type: "text",
+                  type: 'text',
                   onChangeText: field.onChange,
                   ...field,
                 }}
@@ -86,7 +86,7 @@ export default function SignUp() {
               <FormInput
                 label="Name"
                 options={{
-                  type: "text",
+                  type: 'text',
                   onChangeText: field.onChange,
                   ...field,
                 }}
@@ -100,7 +100,7 @@ export default function SignUp() {
               <FormInput
                 label="Email"
                 options={{
-                  type: "text",
+                  type: 'text',
                   onChangeText: field.onChange,
                   ...field,
                 }}
@@ -114,7 +114,7 @@ export default function SignUp() {
               <FormInput
                 label="Phone Number"
                 options={{
-                  type: "text",
+                  type: 'text',
                   onChangeText: field.onChange,
                   ...field,
                 }}
@@ -128,7 +128,7 @@ export default function SignUp() {
               <FormInput
                 label="Password"
                 options={{
-                  type: "password",
+                  type: 'password',
                   onChangeText: field.onChange,
                   ...field,
                 }}

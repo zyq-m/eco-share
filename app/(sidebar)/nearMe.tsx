@@ -1,7 +1,7 @@
-import { router } from "expo-router";
-import { Text, Box, HStack, Avatar, Heading, FlatList } from "native-base";
-import React from "react";
-import { Pressable } from "react-native";
+import { router } from 'expo-router';
+import { Text, Box, HStack, Avatar, Heading, FlatList } from 'native-base';
+import React from 'react';
+import { Pressable } from 'react-native';
 
 export default function NearMe() {
   return (
@@ -19,16 +19,16 @@ const NEAR_USER: NearUser[] = [
   {
     id: 1,
     avatar:
-      "https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&w=600",
+      'https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&w=600',
     location: 50,
-    name: "Amin",
+    name: 'Amin',
   },
   {
     id: 2,
     avatar:
-      "https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&w=600",
+      'https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&w=600',
     location: 100,
-    name: "Ahmad",
+    name: 'Ahmad',
   },
 ];
 

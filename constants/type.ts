@@ -1,56 +1,56 @@
-import { LocationT } from "@/store/store";
+import { LocationT } from '@/store/store';
 
 type ItemT = {
-	id: number;
-	email: string;
-	name: string;
-	category: CategoryT;
-	quantity: number;
-	condition: string | null;
-	expiry: Date | null;
-	location: LocationT | null;
-	description: string | null;
-	timestamp: Date | string;
-	available: boolean;
-	images: { uri: string }[] | null;
-	user?: User;
+  id: number;
+  email: string;
+  name: string;
+  category: CategoryT;
+  quantity: number;
+  condition: string | null;
+  expiry: Date | null;
+  location: LocationT | null;
+  description: string | null;
+  timestamp: Date | string;
+  available: boolean;
+  images: { uri: string }[] | null;
+  user?: User;
 };
 
 interface CardInterface {
-	id: string;
-	uri: string;
-	name: string;
-	rating: number;
-	user?: User;
-	quantity: number;
+  id: string;
+  uri: string;
+  name: string;
+  rating: number;
+  user?: User;
+  quantity: number;
 }
 
 type User = {
-	email: string;
-	name: string | null;
-	avatar: string | null;
-	timestamp: Date;
-	username: string;
-	phone: string | null;
+  email: string;
+  name: string | null;
+  avatar: string | null;
+  timestamp: Date;
+  username: string;
+  phone: string | null;
 };
 
 interface Chat {
-	name: string;
-	avatar: string;
-	message: string;
-	date: string;
+  name: string;
+  avatar: string;
+  message: string;
+  date: string;
 }
 
 interface Cart {
-	item: CardInterface;
-	quantity: number;
-	isCheck: boolean;
+  item: CardInterface;
+  quantity: number;
+  isCheck: boolean;
 }
 
 type CategoryT = {
-	id: string;
-	name: string;
-	image?: string;
+  id: string;
+  name: string;
+  image?: string;
 };
 
 export { CardInterface, Chat, Cart, ItemT, User, CategoryT };

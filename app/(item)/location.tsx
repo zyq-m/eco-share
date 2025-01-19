@@ -1,7 +1,7 @@
-import { useLocationStore } from "@/store/store";
-import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { useLocationStore } from '@/store/store';
+import React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
 export default function Location() {
   const { setLocation, location } = useLocationStore();

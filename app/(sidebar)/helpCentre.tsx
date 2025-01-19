@@ -1,5 +1,5 @@
-import { Text, Checkbox, Box, Heading, VStack, Button } from "native-base";
-import React from "react";
+import { Text, Checkbox, Box, Heading, VStack, Button } from 'native-base';
+import React from 'react';
 
 export default function HelpCentre() {
   return (

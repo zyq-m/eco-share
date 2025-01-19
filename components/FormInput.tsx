@@ -1,5 +1,5 @@
-import { FormControl, Input, WarningOutlineIcon } from "native-base";
-import { InterfaceInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
+import { FormControl, Input, WarningOutlineIcon } from 'native-base';
+import { InterfaceInputProps } from 'native-base/lib/typescript/components/primitives/Input/types';
 
 export default function FormInput({
   label,

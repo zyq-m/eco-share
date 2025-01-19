@@ -1,6 +1,6 @@
-import { CHAT_LIST } from "@/constants/Data";
-import { Chat } from "@/constants/type";
-import { router } from "expo-router";
+import { CHAT_LIST } from '@/constants/Data';
+import { Chat } from '@/constants/type';
+import { router } from 'expo-router';
 import {
   Avatar,
   Box,
@@ -9,7 +9,7 @@ import {
   HStack,
   Pressable,
   Text,
-} from "native-base";
+} from 'native-base';
 
 export default function ChatListScreen() {
   return (

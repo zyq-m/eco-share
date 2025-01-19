@@ -1,8 +1,8 @@
-import FormInput from "@/components/FormInput";
-import api from "@/utils/axios";
-import { Button, VStack } from "native-base";
-import React, { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import FormInput from '@/components/FormInput';
+import api from '@/utils/axios';
+import { Button, VStack } from 'native-base';
+import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 
 type PasswordT = {
   oldPass: string;
@@ -21,7 +21,7 @@ export default function ChangePassword() {
   const onChangePassword = handleSubmit(async (data) => {
     setIsSubmit(true);
     try {
-      const changePass = await api.put("/profile/change-password", data);
+      const changePass = await api.put('/profile/change-password', data);
 
       console.log(changePass.data);
     } catch (error) {
@@ -39,8 +39,8 @@ export default function ChangePassword() {
           <FormInput
             label="Old password"
             options={{
-              type: "password",
-              variant: "underlined",
+              type: 'password',
+              variant: 'underlined',
               onChangeText: field.onChange,
               ...field,
             }}
@@ -56,8 +56,8 @@ export default function ChangePassword() {
           <FormInput
             label="New password"
             options={{
-              type: "password",
-              variant: "underlined",
+              type: 'password',
+              variant: 'underlined',
               onChangeText: field.onChange,
               ...field,
             }}
@@ -73,8 +73,8 @@ export default function ChangePassword() {
           <FormInput
             label="Retype password"
             options={{
-              type: "password",
-              variant: "underlined",
+              type: 'password',
+              variant: 'underlined',
               onChangeText: field.onChange,
               ...field,
             }}

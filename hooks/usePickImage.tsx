@@ -1,5 +1,5 @@
-import { useState } from "react";
-import * as ImagePicker from "expo-image-picker";
+import { useState } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 
 export type ImageT = {
   name?: string | null;
@@ -23,7 +23,7 @@ export default function usePickImage() {
     if (!result.canceled) {
       setImages(
         result.assets.map((d) => ({
-          name: d.fileName ?? d.uri.split("/").pop(),
+          name: d.fileName ?? d.uri.split('/').pop(),
           uri: d.uri,
           type: d.mimeType,
         }))
