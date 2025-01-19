@@ -2,8 +2,7 @@ import { Drawer } from 'expo-router/drawer';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import StackHeader from '@/components/StackHeader';
-import { Box, Text } from 'native-base';
-import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
 
 export default function AppLayout() {
   return (
