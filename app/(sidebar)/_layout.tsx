@@ -1,10 +1,17 @@
 import { Drawer } from 'expo-router/drawer';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import StackHeader from '@/components/StackHeader';
+import { Box, Text } from 'native-base';
+import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 
 export default function AppLayout() {
   return (
-    <Drawer>
+    <Drawer
+      screenOptions={{
+        header: (header) => <StackHeader {...header} menu={true} />,
+      }}
+    >
       <Drawer.Screen
         name="(tabs)"
         options={{
@@ -38,7 +45,7 @@ export default function AppLayout() {
         options={{
           title: 'Guidelines',
           drawerIcon: () => (
-            <MaterialIcons name="question-mark" size={24} color="black" />
+            <AntDesign name="customerservice" size={24} color="black" />
           ),
         }}
       />
@@ -47,7 +54,7 @@ export default function AppLayout() {
         options={{
           title: 'About Us',
           drawerIcon: () => (
-            <MaterialIcons name="question-mark" size={24} color="black" />
+            <MaterialIcons name="info-outline" size={24} color="black" />
           ),
         }}
       />
@@ -56,7 +63,7 @@ export default function AppLayout() {
         options={{
           title: 'Terms & conditions',
           drawerIcon: () => (
-            <MaterialIcons name="question-mark" size={24} color="black" />
+            <FontAwesome5 name="shield-alt" size={24} color="black" />
           ),
         }}
       />

@@ -70,7 +70,7 @@ export default function Profile() {
                 size={20}
                 color="black"
               />
-              <Text>Request Lists</Text>
+              <Text>History</Text>
             </HStack>
             <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
           </HStack>
