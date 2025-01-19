@@ -30,7 +30,7 @@ export default function ChatScreen() {
 
   const onSend = useCallback((messages: IMessage[] = []) => {
     setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages)
+      GiftedChat.append(previousMessages, messages),
     );
   }, []);
 

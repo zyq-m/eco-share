@@ -26,7 +26,7 @@ export default function usePickImage() {
           name: d.fileName ?? d.uri.split('/').pop(),
           uri: d.uri,
           type: d.mimeType,
-        }))
+        })),
       );
     }
   };

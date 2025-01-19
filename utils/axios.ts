@@ -20,7 +20,7 @@ api.interceptors.request.use(
   (error) => {
     // Do something with request error
     return Promise.reject(error);
-  }
+  },
 );
 
 // Handle refreshToken
@@ -43,7 +43,7 @@ api.interceptors.response.use(
       return api(originalRequest);
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 async function renewToken() {
