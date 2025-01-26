@@ -1,4 +1,4 @@
-import { Box, Button, ScrollView, VStack } from 'native-base';
+import { Box, Button, ScrollView } from 'native-base';
 import CardItem from '@/components/CardItem';
 
 import { useEffect, useState } from 'react';
@@ -30,11 +30,12 @@ export default function SearchScreen() {
       .get('/item', {
         params: {
           categoryId: selectedCat,
-          name,
+          name: name,
         },
       })
       .then((res) => {
         setItems(res.data);
+        console.log({ selectedCat, name });
       })
       .catch((err) => {
         if (err.response.status == '404') setItems([]);

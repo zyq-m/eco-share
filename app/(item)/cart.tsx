@@ -59,7 +59,7 @@ function RequestComponent(item: RequestItemT) {
 
   const onCompleted = async () => {
     try {
-      // const itemRes = await api.put(`/item/request/${item.id}`);
+      const itemRes = await api.put(`/item/request/${item.id}`);
       toast.show({
         placement: 'top',
         render: () => (
@@ -110,7 +110,7 @@ function RequestComponent(item: RequestItemT) {
             </Badge>
           ) : (
             <Button onPress={onCompleted} size="sm" rounded="full">
-              Recieve
+              Received
             </Button>
           )}
         </Box>
