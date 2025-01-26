@@ -65,8 +65,8 @@ function RequestComponent(item: RequestItemT) {
         render: () => (
           <Toast
             toast={toast}
-            title="Item recieved"
-            desc="You have marked the item as recieved."
+            title="Item received"
+            desc={`You have marked ${item.item.name} as received.`}
           />
         ),
       });

@@ -22,7 +22,7 @@ export default function Toast({
   // const toast = useToast();
 
   return (
-    <Alert w="98%" status="success" mx="auto">
+    <Alert w="100%" status="success" mx="auto">
       <VStack space={2} flexShrink={1} w="100%">
         <HStack
           flexShrink={1}
