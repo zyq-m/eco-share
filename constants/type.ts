@@ -53,4 +53,12 @@ type CategoryT = {
   image?: string;
 };
 
+export type WishList = {
+  total: number;
+  favourite: {
+    id: number;
+    item: ItemT;
+  }[];
+};
+
 export { CardInterface, Chat, Cart, ItemT, User, CategoryT };

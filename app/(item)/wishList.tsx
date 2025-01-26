@@ -1,41 +1,61 @@
 import CardItem from '@/components/CardItem';
-import { ItemT } from '@/constants/type';
+import Toast from '@/components/Toast';
+import { WishList } from '@/constants/type';
 import api from '@/utils/axios';
 import { useIsFocused } from '@react-navigation/native';
-import { Box, ScrollView } from 'native-base';
+import { ScrollView, Text, useToast, VStack } from 'native-base';
 import { useEffect, useState } from 'react';
 
-type RequestItemT = {
-  id: number;
-  item: ItemT;
-  item_id: number;
-  quantity: number;
-  email: string;
-  completed: boolean;
-};
-
 export default function RequestList() {
-  const [item, setItem] = useState<RequestItemT[]>([]);
+  const [item, setItem] = useState<WishList | null>(null);
   const isFocussed = useIsFocused();
+  const toast = useToast();
+
+  async function fetchItem() {
+    try {
+      const itemRes = await api.get('/favourite');
+      setItem(itemRes.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function removeFav(id: number) {
+    try {
+      const res = await api.delete(`/favourite/${id}`);
+      fetchItem();
+      toast.show({
+        placement: 'top',
+        render: () => (
+          <Toast title="Success" desc={res.data.message} toast={toast} />
+        ),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const itemRes = await api.get('/item/my-request');
-        setItem(itemRes.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     isFocussed && fetchItem();
   }, []);
 
   return (
     <ScrollView>
-      <Box safeAreaX={2}>
-        <CardItem items={item.map((i) => ({ ...i.item }))} />
-      </Box>
+      {item?.favourite.length ? (
+        <VStack safeAreaX={2} space={2} mb="4">
+          {item?.favourite.map((item) => (
+            <CardItem
+              key={item.id}
+              {...item.item}
+              onFav={() => removeFav(item.id)}
+            />
+          ))}
+        </VStack>
+      ) : (
+        <Text color="gray.500" textAlign="center">
+          Nothing yet
+        </Text>
+      )}
     </ScrollView>
   );
 }

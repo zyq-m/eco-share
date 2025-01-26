@@ -30,16 +30,16 @@ export default function RequestList() {
   const [item, setItem] = useState<RequestItemT[]>([]);
   const isFocussed = useIsFocused();
 
-  useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const itemRes = await api.get('/item/my-request');
-        setItem(itemRes.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const fetchItem = async () => {
+    try {
+      const itemRes = await api.get('/item/my-request');
+      setItem(itemRes.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     isFocussed && fetchItem();
   }, []);
 
@@ -47,19 +47,20 @@ export default function RequestList() {
     <ScrollView>
       <VStack space={2} safeAreaX={2}>
         {item.map((d) => (
-          <RequestComponent key={d.id} {...d} />
+          <RequestComponent key={d.id} {...d} refresh={fetchItem} />
         ))}
       </VStack>
     </ScrollView>
   );
 }
 
-function RequestComponent(item: RequestItemT) {
+function RequestComponent(item: RequestItemT & { refresh: () => void }) {
   const toast = useToast();
 
   const onCompleted = async () => {
     try {
-      const itemRes = await api.put(`/item/request/${item.id}`);
+      await api.put(`/item/request/${item.id}`);
+      item.refresh();
       toast.show({
         placement: 'top',
         render: () => (

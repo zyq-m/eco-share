@@ -1,4 +1,5 @@
 import CardItem from '@/components/CardItem';
+import Toast from '@/components/Toast';
 import { ItemT } from '@/constants/type';
 import api from '@/utils/axios';
 import { AntDesign } from '@expo/vector-icons';
@@ -16,6 +17,7 @@ import {
   Pressable,
   ScrollView,
   Text,
+  useToast,
   VStack,
 } from 'native-base';
 import { useEffect, useState } from 'react';
@@ -31,6 +33,7 @@ export default function HomeScreen() {
 
   const [items, setItems] = useState<ItemT[]>([]);
   const isFocused = useIsFocused();
+  const toast = useToast();
 
   const fetchItems = async () => {
     try {
@@ -45,6 +48,17 @@ export default function HomeScreen() {
       console.log(error);
     }
   };
+
+  async function addFav(id: number) {
+    api.post('/favourite', { itemId: id }).then((res) => {
+      toast.show({
+        placement: 'top',
+        render: () => (
+          <Toast title="Success" desc={res.data.message} toast={toast} />
+        ),
+      });
+    });
+  }
 
   useEffect(() => {
     isFocused && fetchItems();
@@ -87,6 +101,7 @@ export default function HomeScreen() {
             rightIcon={<Icon as={AntDesign} name="right" size="xs" />}
             mt="3"
             px="5"
+            rounded="full"
           >
             Try Now
           </Button>
@@ -131,7 +146,11 @@ export default function HomeScreen() {
           <Heading mb="4" fontSize="md" textTransform="uppercase">
             Suggested
           </Heading>
-          <CardItem items={items} />
+          <VStack space={2} mb="4">
+            {items.map((item) => (
+              <CardItem key={item.id} {...item} onFav={() => addFav(item.id)} />
+            ))}
+          </VStack>
         </Box>
       </VStack>
     </ScrollView>

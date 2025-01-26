@@ -30,7 +30,6 @@ export default function HomeHeader() {
         name: searchText,
       },
     });
-    setSearchText('');
   }
 
   return (

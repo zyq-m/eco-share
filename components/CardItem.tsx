@@ -9,73 +9,64 @@ import {
   Image,
   Text,
   Button,
-  VStack,
 } from 'native-base';
 import { Pressable } from 'react-native';
 
-export default function CardItem({ items }: { items: ItemT[] }) {
+export default function CardItem({ ...props }: ItemT & { onFav?: () => void }) {
   return (
-    <VStack space="2" mb="4">
-      {items?.map((item) => (
-        <Box
-          key={item.id}
-          background="white"
-          p="3"
-          rounded="sm"
-          overflow="hidden"
-        >
-          <Pressable>
-            <HStack space="2">
-              <AspectRatio w="170">
-                <Image
-                  rounded="sm"
-                  source={{
-                    uri: `${process.env.EXPO_PUBLIC_API_URL}/${item.images?.[0].uri}`,
-                  }}
-                  alt={item.name}
+    <Box key={props.id} background="white" p="3" rounded="sm" overflow="hidden">
+      <Pressable>
+        <HStack space="2">
+          <AspectRatio w="170">
+            <Image
+              rounded="sm"
+              source={{
+                uri: `${process.env.EXPO_PUBLIC_API_URL}/${props.images?.[0].uri}`,
+              }}
+              alt={props.name}
+            />
+          </AspectRatio>
+          <Box flexGrow="1">
+            <Box mb="4">
+              <Text
+                textTransform="capitalize"
+                mb="1"
+                fontWeight="bold"
+                fontSize="md"
+              >
+                {props.name}
+              </Text>
+              <HStack justifyContent="space-between">
+                <Text fontSize="xs">Quantity: {props.quantity}</Text>
+              </HStack>
+              <HStack justifyContent="space-between">
+                <Text fontSize="xs">Condition: {props.condition}</Text>
+              </HStack>
+              <HStack justifyContent="space-between">
+                <Text fontSize="xs">Description: {props.description}</Text>
+              </HStack>
+            </Box>
+            <HStack alignItems="center" justifyContent="flex-end" space="3">
+              <Pressable onPress={props?.onFav}>
+                <Icon
+                  as={MaterialCommunityIcons}
+                  name="cards-heart-outline"
+                  size="lg"
+                  color="red.400"
                 />
-              </AspectRatio>
-              <Box flexGrow="1">
-                <Box mb="4">
-                  <Text
-                    textTransform="capitalize"
-                    mb="1"
-                    fontWeight="bold"
-                    fontSize="md"
-                  >
-                    {item.name}
-                  </Text>
-                  <HStack justifyContent="space-between">
-                    <Text fontSize="xs">Quantity: {item.quantity}</Text>
-                  </HStack>
-                  <HStack justifyContent="space-between">
-                    <Text fontSize="xs">Condition: {item.condition}</Text>
-                  </HStack>
-                  <HStack justifyContent="space-between">
-                    <Text fontSize="xs">Description: {item.description}</Text>
-                  </HStack>
-                </Box>
-                <HStack alignItems="center" justifyContent="flex-end" space="3">
-                  <Icon
-                    as={MaterialCommunityIcons}
-                    name="cards-heart-outline"
-                    size="md"
-                    color="red.400"
-                  />
-                  <Button
-                    size="sm"
-                    rounded="full"
-                    px="4"
-                    onPress={() => router.push(`/(item)/${item.id}`)}
-                  >
-                    Request
-                  </Button>
-                </HStack>
-              </Box>
+              </Pressable>
+              <Button
+                size="sm"
+                rounded="full"
+                px="4"
+                onPress={() => router.push(`/(item)/${props.id}`)}
+              >
+                Request
+              </Button>
             </HStack>
-          </Pressable>
-        </Box>
-      ))}
-    </VStack>
+          </Box>
+        </HStack>
+      </Pressable>
+    </Box>
   );
 }

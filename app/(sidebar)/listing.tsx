@@ -2,7 +2,7 @@ import CardItem from '@/components/CardItem';
 import { ItemT } from '@/constants/type';
 import api from '@/utils/axios';
 import { useIsFocused } from '@react-navigation/native';
-import { Box, FlatList } from 'native-base';
+import { Box, FlatList, Text } from 'native-base';
 import React, { useEffect, useState } from 'react';
 
 export default function Listing() {
@@ -31,6 +31,11 @@ export default function Listing() {
         renderItem={({ item }) => <CardItem {...item} />}
         keyExtractor={(item) => JSON.stringify(item.id)}
       />
+      {!items.length && (
+        <Text color="gray.500" textAlign="center">
+          Nothing yet
+        </Text>
+      )}
     </Box>
   );
 }
