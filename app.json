@@ -43,17 +43,18 @@
         }
       ],
       "expo-secure-store",
-      ["expo-splash-screen",
-      {
-        "backgroundColor": "#ffffff",
-        "image": "./assets/splash-icon-light.png",
-        "dark": {
-          "image": "./assets/splash-icon-dark.png",
-          "backgroundColor": "#000000"
-        },
-        "imageWidth": 200
-      }
-    ]
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash-icon-light.png",
+          "dark": {
+            "image": "./assets/splash-icon-dark.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
