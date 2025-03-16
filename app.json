@@ -7,11 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     },
@@ -47,7 +42,18 @@
           "photosPermission": "The app accesses your photos to let you share them with others."
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      ["expo-splash-screen",
+      {
+        "backgroundColor": "#ffffff",
+        "image": "./assets/splash-icon-light.png",
+        "dark": {
+          "image": "./assets/splash-icon-dark.png",
+          "backgroundColor": "#000000"
+        },
+        "imageWidth": 200
+      }
+    ]
     ],
     "experiments": {
       "typedRoutes": true
