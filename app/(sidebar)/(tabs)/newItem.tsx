@@ -62,6 +62,34 @@ const listOption = [
   },
 ];
 
+const condition = [
+  {
+    id: 1,
+    label: 'Not yet expired',
+    value: 'Not yet expired',
+  },
+  {
+    id: 2,
+    label: 'Sealed',
+    value: 'Sealed',
+  },
+  {
+    id: 3,
+    label: 'Partially used',
+    value: 'Partially used',
+  },
+  {
+    id: 4,
+    label: 'Fresh',
+    value: 'Fresh',
+  },
+  {
+    id: 5,
+    label: 'Frozen',
+    value: 'Frozen',
+  },
+];
+
 export default function NewItemScreen() {
   const { pickImage, images, clear } = usePickImage();
   const { location } = useLocationStore();
@@ -268,14 +296,24 @@ export default function NewItemScreen() {
             name="condition"
             rules={{ required: true }}
             control={control}
-            render={({ field }) => (
-              <TextArea
+            render={({ field: { value, onChange } }) => (
+              <Select
                 variant="underlined"
-                numberOfLines={2}
-                autoCompleteType={undefined}
-                onChangeText={field.onChange}
-                {...field}
-              />
+                selectedValue={value}
+                minWidth="200"
+                accessibilityLabel="Pick one"
+                placeholder="Pick one"
+                _selectedItem={{
+                  bg: 'teal.600',
+                  endIcon: <CheckIcon size="5" />,
+                }}
+                mt="1"
+                onValueChange={(itemValue) => onChange(itemValue)}
+              >
+                {condition.map((d, i) => (
+                  <Select.Item key={d.id} label={d.label} value={d.value} />
+                ))}
+              </Select>
             )}
           />
         </Box>

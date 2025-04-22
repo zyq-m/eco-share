@@ -15,6 +15,7 @@ import {
   Alert,
   IconButton,
   CloseIcon,
+  Checkbox,
 } from 'native-base';
 
 export default function ConfirmationModal({
@@ -28,6 +29,7 @@ export default function ConfirmationModal({
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [isChecked, setChecked] = useState(false);
   const toast = useToast();
 
   const onRequest = async () => {
@@ -107,6 +109,7 @@ export default function ConfirmationModal({
       return prev;
     });
   };
+
   return (
     <>
       <Button isDisabled={!item?.available} onPress={() => setShowModal(true)}>
@@ -154,18 +157,25 @@ export default function ConfirmationModal({
             <VStack space="4">
               <Box>
                 <Heading size="md">Do</Heading>
-                <Text>Indicate what time you can collect</Text>
-                <Text>Inform if you're running late</Text>
+                <Text>Indicate what time you can collect the item</Text>
+                <Text>Inform the owner if you're running late</Text>
               </Box>
               <Box>
                 <Heading size="md">Don't</Heading>
                 <Text>Ask the item to be delivered/posted</Text>
-                <Text>Get upset if you dont't get something</Text>
-                <Text>Set off for a collection untill</Text>
+                <Text>Get upset if you don't get something</Text>
+                <Text>Set off for a collection untill:</Text>
                 <Text>1. It's been confirmed</Text>
                 <Text>2. You have the address</Text>
                 <Text>3. There's an agreed time</Text>
               </Box>
+              <Checkbox
+                value="read"
+                isChecked={isChecked}
+                onChange={setChecked}
+              >
+                I have read the guidelines
+              </Checkbox>
             </VStack>
           </Modal.Body>
           <Modal.Footer>
@@ -174,6 +184,7 @@ export default function ConfirmationModal({
               isLoadingText="Confirm"
               isLoading={isSubmit}
               onPress={onRequest}
+              isDisabled={!isChecked}
             >
               Continue in chat
             </Button>
