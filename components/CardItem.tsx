@@ -43,7 +43,14 @@ export default function CardItem({ ...props }: ItemT & { onFav?: () => void }) {
                 <Text fontSize="xs">Condition: {props.condition}</Text>
               </HStack>
               <HStack justifyContent="space-between">
-                <Text fontSize="xs">Description: {props.description}</Text>
+                <Text
+                  fontSize="xs"
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                  w="40"
+                >
+                  Description: {props.description}
+                </Text>
               </HStack>
             </Box>
             <HStack alignItems="center" justifyContent="flex-end" space="3">
