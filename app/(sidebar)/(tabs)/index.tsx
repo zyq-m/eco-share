@@ -92,10 +92,10 @@ export default function HomeScreen() {
           bg="rgba(0, 0, 0, 0.27)"
         >
           <Heading color="white" fontSize="4xl">
-            Rebound
+            Rebound Hub
           </Heading>
           <Text color="white" fontSize="lg">
-            Turning Surplus Into a Sustainable Cycle
+            Connecting Surplus, Empowering Communities
           </Text>
           <Button
             rightIcon={<Icon as={AntDesign} name="right" size="xs" />}
