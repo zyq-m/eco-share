@@ -66,6 +66,7 @@ export default function CardItem({ ...props }: ItemT & { onFav?: () => void }) {
                 size="sm"
                 rounded="full"
                 px="4"
+                bg="#EFB255"
                 onPress={() => router.push(`/(item)/${props.id}`)}
               >
                 Request

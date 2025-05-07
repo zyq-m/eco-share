@@ -102,6 +102,7 @@ export default function HomeScreen() {
             mt="3"
             px="5"
             rounded="full"
+            bg="#EFB255"
           >
             Try Now
           </Button>

@@ -45,11 +45,17 @@ export default function RequestList() {
 
   return (
     <ScrollView>
-      <VStack space={2} safeAreaX={2}>
-        {item.map((d) => (
-          <RequestComponent key={d.id} {...d} refresh={fetchItem} />
-        ))}
-      </VStack>
+      {item.length ? (
+        <VStack space={2} safeAreaX={2}>
+          {item.map((d) => (
+            <RequestComponent key={d.id} {...d} refresh={fetchItem} />
+          ))}
+        </VStack>
+      ) : (
+        <Text color="gray.500" textAlign="center">
+          Nothing yet
+        </Text>
+      )}
     </ScrollView>
   );
 }

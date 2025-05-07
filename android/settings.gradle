@@ -1,4 +1,4 @@
-rootProject.name = 'eco-share'
+rootProject.name = 'rebound'
 
 dependencyResolutionManagement {
   versionCatalogs {

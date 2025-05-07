@@ -6,6 +6,7 @@ import {
   Button,
   VStack,
   HStack,
+  Image,
 } from 'native-base';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -14,15 +15,18 @@ import { Pressable } from 'react-native';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { User } from '@/constants/type';
-import api from '@/utils/axios';
+import api, { BASE_URL } from '@/utils/axios';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function Profile() {
   const [profile, setProfile] = useState<User>();
+  const isFocused = useIsFocused();
 
   const fetchProfile = async () => {
     try {
       const profileRes = await api.get('/profile');
       setProfile(profileRes.data);
+      console.log(profileRes.data);
     } catch (error) {
       // do popup
       console.log(error);
@@ -31,22 +35,19 @@ export default function Profile() {
 
   useEffect(() => {
     fetchProfile();
-  }, []);
+  }, [isFocused]);
 
   return (
     <VStack space="4">
       <Box background="white" px="4" py="6" rounded="sm" alignItems="center">
         <Avatar
-          bg="purple.600"
           alignSelf="center"
           size="xl"
           source={{
-            uri:
-              profile?.avatar ??
-              'https://images.pexels.com/photos/57416/cat-sweet-kitty-animals-57416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            uri: `${BASE_URL}/${profile?.avatar}`,
           }}
         >
-          RB
+          {profile?.name?.slice(0, 2)}
         </Avatar>
         <Heading textTransform="capitalize" size="md" mt="2">
           {profile?.name}
@@ -56,13 +57,14 @@ export default function Profile() {
           rounded="full"
           px="6"
           mt="4"
-          // onPress={() => router.push(`/(profile)/${1}`)}
+          bg="#EFB255"
+          onPress={() => router.push(`/(profile)/update`)}
         >
           Edit profile
         </Button>
       </Box>
       <VStack background="white" px="5" py="6" rounded="sm" space="8">
-        <Pressable onPress={() => router.push('/(item)/wishList')}>
+        {/* <Pressable onPress={() => router.push('/(item)/wishList')}>
           <HStack justifyContent="space-between" alignItems="center">
             <HStack space="3" alignItems="center">
               <MaterialIcons
@@ -74,7 +76,7 @@ export default function Profile() {
             </HStack>
             <MaterialIcons name="arrow-forward-ios" size={16} color="black" />
           </HStack>
-        </Pressable>
+        </Pressable> */}
         <Pressable onPress={() => router.push('/(profile)/changePassword')}>
           <HStack justifyContent="space-between" alignItems="center">
             <HStack space="3" alignItems="center">

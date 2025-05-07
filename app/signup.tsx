@@ -41,8 +41,8 @@ export default function SignUp() {
   });
 
   return (
-    <ScrollView w="100%">
-      <Box safeAreaTop px="4">
+    <ScrollView w="100%" bg="#FFF8E1">
+      <Box safeAreaTop={16} px="4">
         <Heading
           size="lg"
           color="coolGray.800"
@@ -135,7 +135,7 @@ export default function SignUp() {
               />
             )}
           />
-          <Button mt="2" colorScheme="indigo" onPress={onSubmit}>
+          <Button mt="2" bg="#EFB255" onPress={onSubmit}>
             Sign up
           </Button>
         </VStack>

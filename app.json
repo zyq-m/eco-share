@@ -1,12 +1,17 @@
 {
   "expo": {
-    "name": "eco-share",
-    "slug": "eco-share",
+    "name": "Rebound Hub",
+    "slug": "rebound-hub",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "splash": {
+      // "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFF8E1"
+    },
     "ios": {
       "supportsTablet": true
     },
@@ -44,15 +49,9 @@
       ],
       "expo-secure-store",
       [
-        "expo-splash-screen",
+        "@rnmapbox/maps",
         {
-          "backgroundColor": "#ffffff",
-          "image": "./assets/splash-icon-light.png",
-          "dark": {
-            "image": "./assets/splash-icon-dark.png",
-            "backgroundColor": "#000000"
-          },
-          "imageWidth": 200
+          "RNMapboxMapsDownloadToken": "wzXqBh0Bit4IGM8kIRpJ"
         }
       ]
     ],

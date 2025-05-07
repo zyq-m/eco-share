@@ -31,6 +31,7 @@ import { router } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LocationT, useLocationStore } from '@/store/store';
 import useCategory from '@/hooks/useCategory';
+import MapScreen from '@/components/MapScreen';
 
 type ItemForm = {
   name: string;
@@ -367,7 +368,7 @@ export default function NewItemScreen() {
             </HStack>
           </Pressable>
           <Box overflow="hidden" borderRadius="md">
-            <MapView
+            {/* <MapView
               showsUserLocation
               style={{ width: '100%', height: 200 }}
               initialRegion={{
@@ -378,10 +379,13 @@ export default function NewItemScreen() {
               }}
             >
               {location && <Marker coordinate={{ ...location }} />}
-            </MapView>
+            </MapView> */}
+            <MapScreen />
           </Box>
         </Box>
-        <Button onPress={addItem}>Add Item</Button>
+        <Button onPress={addItem} bg="#EFB255">
+          Add Item
+        </Button>
       </VStack>
     </ScrollView>
   );

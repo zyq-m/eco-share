@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import { setItem } from 'expo-secure-store';
 
 import api from '@/utils/axios';
+import { socket } from '@/utils/io';
 
 type LoginForm = {
   email?: string;
@@ -24,7 +25,7 @@ type LoginForm = {
 
 export default function LoginScreen() {
   const { control, handleSubmit, setValue } = useForm<LoginForm>();
-  const { email, setAuth } = useUserStore();
+  const { email, setAuth, setEmail } = useUserStore();
 
   const onLogin = handleSubmit(async (data) => {
     try {
@@ -32,7 +33,12 @@ export default function LoginScreen() {
 
       setItem('accessToken', user.data.accessToken);
       setItem('refreshToken', user.data.refreshToken);
-      setAuth(true); // set true
+
+      if (data.email) {
+        setEmail(data.email);
+        setAuth(true); // set true
+        socket.emit('register', data.email);
+      }
 
       router.replace('/(sidebar)/(tabs)');
     } catch (error) {
@@ -45,7 +51,7 @@ export default function LoginScreen() {
   }, []);
 
   return (
-    <Center w="100%" h="full" alignItems="center">
+    <Center w="100%" h="full" alignItems="center" bg="#FFF8E1">
       <Box safeArea p="2" py="8" w="90%">
         <Heading
           size="lg"
@@ -107,7 +113,7 @@ export default function LoginScreen() {
               Forget Password?
             </Link>
           </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={onLogin}>
+          <Button mt="2" bg="#EFB255" onPress={onLogin}>
             Sign in
           </Button>
           <HStack mt="6" justifyContent="center">

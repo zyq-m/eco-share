@@ -3,6 +3,7 @@ import { Drawer } from 'expo-router/drawer';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import StackHeader from '@/components/StackHeader';
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import CustomDrawerContent from '@/components/CustomDrawerContent';
 
 export default function AppLayout() {
   return (
@@ -10,6 +11,7 @@ export default function AppLayout() {
       screenOptions={{
         header: (header) => <StackHeader {...header} menu={true} />,
       }}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
         name="(tabs)"

@@ -35,10 +35,17 @@ type User = {
 };
 
 interface Chat {
-  name: string;
-  avatar: string;
-  message: string;
-  date: string;
+  id: number;
+  user: User;
+  message: {
+    id: number;
+    text: string | null;
+    createdAt: Date;
+  };
+  // name: string;
+  // avatar: string;
+  // message: string;
+  // date: string;
 }
 
 interface Cart {
@@ -59,6 +66,17 @@ export type WishList = {
     id: number;
     item: ItemT;
   }[];
+};
+
+export type RequestedUserT = {
+  id: number;
+  item: ItemT;
+  item_id: number;
+  quantity: number;
+  email: string;
+  user: User;
+  completed: boolean;
+  timestamp: Date | string;
 };
 
 export { CardInterface, Chat, Cart, ItemT, User, CategoryT };

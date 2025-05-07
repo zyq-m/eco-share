@@ -15,7 +15,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { ItemT } from '@/constants/type';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import MapView, { Marker } from 'react-native-maps';
-import api from '@/utils/axios';
+import api, { BASE_URL } from '@/utils/axios';
 import { useNavigation } from 'expo-router';
 import dayjs from 'dayjs';
 import relativetime from 'dayjs/plugin/relativeTime';
@@ -31,13 +31,11 @@ export default function ItemScreen() {
   const fetchItem = async () => {
     try {
       const itemRes = await api.get(`/item/${id}`);
-
       setItem({
         ...itemRes.data,
         timestamp: dayjs().to(itemRes.data?.timestamp).toString(),
       });
       setLocation(itemRes.data.location);
-
       navigation.setOptions({ title: itemRes.data.name });
     } catch (error) {
       // do popup
@@ -79,11 +77,11 @@ export default function ItemScreen() {
             <Avatar
               size="sm"
               source={{
-                uri:
-                  item?.user?.avatar ??
-                  'https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=600',
+                uri: `${BASE_URL}/${item?.user?.avatar}`,
               }}
-            />
+            >
+              {item?.user?.name?.slice(0, 2)}
+            </Avatar>
             <Text>{item?.user?.name}</Text>
           </HStack>
           <HStack space="1" alignItems="center" mb="3">

@@ -13,6 +13,7 @@ export default function StackHeader({
     <HStack
       safeAreaTop
       bgColor="primary.500"
+      bg="#03402F"
       alignItems="center"
       space="6"
       py="3"

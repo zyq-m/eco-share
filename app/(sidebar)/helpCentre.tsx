@@ -23,7 +23,9 @@ export default function HelpCentre() {
       <Checkbox value="read" mt="5" mb="3">
         I have read the guidelines
       </Checkbox>
-      <Button borderRadius="full">Continue</Button>
+      <Button borderRadius="full" bg="#EFB255">
+        Continue
+      </Button>
     </Box>
   );
 }

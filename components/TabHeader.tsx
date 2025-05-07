@@ -1,6 +1,6 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { HStack, Input, Icon, Badge, VStack } from 'native-base';
+import { HStack, Input, Icon } from 'native-base';
 
 export default function TabHeader() {
   return (

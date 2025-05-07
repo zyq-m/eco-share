@@ -77,11 +77,21 @@ const CARD_ITEM: CardInterface[] = [
 
 const CHAT_LIST: Chat[] = [
   {
-    name: 'John',
-    avatar:
-      'https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&w=600',
-    message: 'Hi there. This is item is available',
-    date: '06/08/2024',
+    id: 3,
+    user: {
+      name: 'John',
+      avatar:
+        'https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&w=600',
+      email: 'user@email.com',
+      timestamp: new Date(),
+      phone: '',
+      username: '',
+    },
+    message: {
+      id: 1,
+      text: 'Hi there. This is item is available',
+      createdAt: new Date(),
+    },
   },
 ];
 

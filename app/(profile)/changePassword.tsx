@@ -29,6 +29,7 @@ export default function ChangePassword() {
     }
     setIsSubmit(false);
   });
+
   return (
     <VStack safeAreaX={4} safeAreaTop>
       <Controller

@@ -17,9 +17,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/lobster": "^0.3.0",
+    "@expo-google-fonts/poppins": "^0.3.1",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/drawer": "^6.7.2",
     "@react-navigation/native": "^6.0.2",
+    "@rnmapbox/maps": "^10.1.38",
     "axios": "^1.7.7",
     "core-js": "^3.38.1",
     "dayjs": "^1.11.13",
@@ -49,6 +52,7 @@
     "react-native-screens": "~3.29.0",
     "react-native-svg": "14.1.0",
     "react-native-web": "~0.19.10",
+    "socket.io-client": "^4.8.1",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

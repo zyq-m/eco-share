@@ -35,7 +35,7 @@ export default function ConfirmationModal({
   const onRequest = async () => {
     setIsSubmit(true);
     try {
-      await api.post(`/item/${id}`, { quantity });
+      // await api.post(`/item/${id}`, { quantity });
 
       toast.show({
         placement: 'top',
@@ -90,8 +90,10 @@ export default function ConfirmationModal({
       router.navigate({
         pathname: `/(chat)/${item.user?.name}`,
         params: {
-          image: `${process.env.EXPO_PUBLIC_API_URL}/${item.images?.[0].uri}`,
+          image: `${item.images?.[0].uri}`,
           name: item.name,
+          pEmail: item.user?.email,
+          text: 'Hi is this item available?',
         },
       });
       setIsSubmit(false);
@@ -112,7 +114,11 @@ export default function ConfirmationModal({
 
   return (
     <>
-      <Button isDisabled={!item?.available} onPress={() => setShowModal(true)}>
+      <Button
+        bg="#EFB255"
+        isDisabled={!item?.available}
+        onPress={() => setShowModal(true)}
+      >
         Request This Item
       </Button>
       <Modal isOpen={showModal}>
@@ -138,6 +144,7 @@ export default function ConfirmationModal({
                 setShowModal(false);
                 setShowModal2(true);
               }}
+              bg="#EFB255"
             >
               Continue
             </Button>
@@ -185,6 +192,7 @@ export default function ConfirmationModal({
               isLoading={isSubmit}
               onPress={onRequest}
               isDisabled={!isChecked}
+              bg="#EFB255"
             >
               Continue in chat
             </Button>

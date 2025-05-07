@@ -33,8 +33,8 @@ export default function HomeHeader() {
   }
 
   return (
-    <Box safeAreaTop bg="primary.500">
-      <HStack bg="primary.500" px="1" py="3" alignItems="center">
+    <Box safeAreaTop bg="#03402F">
+      <HStack bg="#03402F" px="1" py="3" alignItems="center">
         <IconButton
           icon={<Icon as={MaterialIcons} name="menu" size="lg" color="white" />}
           onPress={() => navigation.openDrawer()}
