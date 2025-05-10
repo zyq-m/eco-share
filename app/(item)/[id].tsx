@@ -14,7 +14,7 @@ import {
 import { router, useLocalSearchParams } from 'expo-router';
 import { ItemT } from '@/constants/type';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import MapView, { Marker } from 'react-native-maps';
+// import MapView, { Marker } from 'react-native-maps';
 import api, { BASE_URL } from '@/utils/axios';
 import { useNavigation } from 'expo-router';
 import dayjs from 'dayjs';
@@ -117,7 +117,7 @@ export default function ItemScreen() {
               </HStack>
             </Pressable>
             <Box overflow="hidden" borderRadius="md">
-              <MapView
+              {/* <MapView
                 showsUserLocation
                 style={{ width: '100%', height: 200 }}
                 initialRegion={{
@@ -128,7 +128,7 @@ export default function ItemScreen() {
                 }}
               >
                 {location && <Marker coordinate={{ ...location }} />}
-              </MapView>
+              </MapView> */}
             </Box>
           </Box>
         </VStack>

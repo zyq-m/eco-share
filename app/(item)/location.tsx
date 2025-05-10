@@ -1,7 +1,7 @@
 import { useLocationStore } from '@/store/store';
 import React, { useEffect } from 'react';
 import { Alert, SafeAreaView, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+// import MapView, { Marker } from 'react-native-maps';
 import * as Loc from 'expo-location';
 
 export default function Location() {
@@ -51,7 +51,7 @@ export default function Location() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <MapView
+      {/* <MapView
         showsUserLocation
         showsMyLocationButton
         style={StyleSheet.absoluteFill}
@@ -71,7 +71,7 @@ export default function Location() {
             }}
           />
         )}
-      </MapView>
+      </MapView> */}
     </SafeAreaView>
   );
 }

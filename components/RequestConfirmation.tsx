@@ -35,7 +35,7 @@ export default function ConfirmationModal({
   const onRequest = async () => {
     setIsSubmit(true);
     try {
-      // await api.post(`/item/${id}`, { quantity });
+      await api.post(`/item/${id}`, { quantity });
 
       toast.show({
         placement: 'top',

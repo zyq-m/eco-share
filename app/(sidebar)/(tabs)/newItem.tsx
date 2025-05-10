@@ -19,7 +19,7 @@ import {
   VStack,
   WarningOutlineIcon,
 } from 'native-base';
-import MapView, { Marker } from 'react-native-maps';
+// import MapView, { Marker } from 'react-native-maps';
 import { Pressable } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import usePickImage, { ImageT } from '@/hooks/usePickImage';
@@ -31,7 +31,7 @@ import { router } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LocationT, useLocationStore } from '@/store/store';
 import useCategory from '@/hooks/useCategory';
-import MapScreen from '@/components/MapScreen';
+// import MapScreen from '@/components/MapScreen';
 
 type ItemForm = {
   name: string;
@@ -380,7 +380,7 @@ export default function NewItemScreen() {
             >
               {location && <Marker coordinate={{ ...location }} />}
             </MapView> */}
-            <MapScreen />
+            {/* <MapScreen /> */}
           </Box>
         </Box>
         <Button onPress={addItem} bg="#EFB255">

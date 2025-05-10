@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "splash": {
       // "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -52,7 +52,7 @@
       [
         "@rnmapbox/maps",
         {
-          "RNMapboxMapsDownloadToken": "wzXqBh0Bit4IGM8kIRpJ"
+          "RNMapboxMapsImpl": "maplibre"
         }
       ]
     ],

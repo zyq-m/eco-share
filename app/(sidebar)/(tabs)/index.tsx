@@ -92,7 +92,7 @@ export default function HomeScreen() {
           bg="rgba(0, 0, 0, 0.27)"
         >
           <Heading color="white" fontSize="4xl">
-            Rebound Hub
+            Rizkify
           </Heading>
           <Text color="white" fontSize="lg">
             Connecting Surplus, Empowering Communities

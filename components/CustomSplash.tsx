@@ -49,14 +49,14 @@ export default function CustomSplash() {
           resizeMode: 'contain',
         }}
       />
-      <Text style={styles.title}>rebound hub</Text>
+      <Text style={styles.title}>Rizkify</Text>
       <Text style={styles.desc}>
         Connecting Surplus, Empowering Communities
       </Text>
     </Animated.View>
   );
 }
-
+``;
 const styles = StyleSheet.create({
   center: {
     alignItems: 'center',
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     color: '#176A3E',
     letterSpacing: 1.5,
     marginBottom: 4,
-    textTransform: 'lowercase',
   },
   desc: {
     fontSize: 16,

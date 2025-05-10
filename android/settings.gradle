@@ -1,4 +1,4 @@
-rootProject.name = 'rebound'
+rootProject.name = 'Rebound Hub'
 
 dependencyResolutionManagement {
   versionCatalogs {
