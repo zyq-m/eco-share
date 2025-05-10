@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "eco-share",
-    "slug": "eco-share",
+    "name": "Rebound Hub",
+    "slug": "rebound-hub",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/splash.png",
+      // "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFF8E1"
     },
     "ios": {
       "supportsTablet": true
@@ -19,7 +19,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.zyq.m.ecoshare"
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +34,27 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location.",
+          "locationWhenInUsePermission": "Show current location on map."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with others."
+        }
+      ],
+      "expo-secure-store",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "maplibre"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   FormControl,
@@ -9,18 +9,45 @@ import {
   Center,
   Heading,
   VStack,
-} from "native-base";
-import { InterfaceInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
+  ScrollView,
+} from 'native-base';
+import { InterfaceInputProps } from 'native-base/lib/typescript/components/primitives/Input/types';
+import { useForm, Controller } from 'react-hook-form';
+import api from '@/utils/axios';
+import { useUserStore } from '@/store/store';
+import { router } from 'expo-router';
+
+type SignUpForm = {
+  username: string;
+  name?: string;
+  email: string;
+  phone: string;
+  password: string;
+};
 
 export default function SignUp() {
+  const { control, handleSubmit } = useForm<SignUpForm>();
+  const { setEmail } = useUserStore();
+
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const newUser = await api.post('/auth/sign-up', data);
+
+      setEmail(newUser.data.email);
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return (
-    <Center w="100%">
-      <Box safeArea p="2" w="90%" py="8">
+    <ScrollView w="100%" bg="#FFF8E1">
+      <Box safeAreaTop={16} px="4">
         <Heading
           size="lg"
           color="coolGray.800"
           _dark={{
-            color: "warmGray.50",
+            color: 'warmGray.50',
           }}
           fontWeight="semibold"
         >
@@ -30,7 +57,7 @@ export default function SignUp() {
           mt="1"
           color="coolGray.600"
           _dark={{
-            color: "warmGray.200",
+            color: 'warmGray.200',
           }}
           fontWeight="medium"
           size="xs"
@@ -38,17 +65,82 @@ export default function SignUp() {
           Sign up to continue!
         </Heading>
         <VStack space={3} mt="5">
-          <FormInput label="Username" options={{ type: "text" }} />
-          <FormInput label="Email" options={{ type: "text" }} />
-          <FormInput label="Phone Number" options={{ type: "text" }} />
-          <FormInput label="Username" options={{ type: "text" }} />
-          <FormInput label="Password" options={{ type: "password" }} />
-          <Button mt="2" colorScheme="indigo">
+          <Controller
+            name="username"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label="Username"
+                options={{
+                  type: 'text',
+                  onChangeText: field.onChange,
+                  ...field,
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="name"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label="Name"
+                options={{
+                  type: 'text',
+                  onChangeText: field.onChange,
+                  ...field,
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label="Email"
+                options={{
+                  type: 'text',
+                  onChangeText: field.onChange,
+                  ...field,
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label="Phone Number"
+                options={{
+                  type: 'text',
+                  onChangeText: field.onChange,
+                  ...field,
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label="Password"
+                options={{
+                  type: 'password',
+                  onChangeText: field.onChange,
+                  ...field,
+                }}
+              />
+            )}
+          />
+          <Button mt="2" bg="#EFB255" onPress={onSubmit}>
             Sign up
           </Button>
         </VStack>
       </Box>
-    </Center>
+    </ScrollView>
   );
 }
 

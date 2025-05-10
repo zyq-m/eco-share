@@ -1,0 +1,46 @@
+diff --git a/node_modules/@rnmapbox/maps/android/build.gradle b/node_modules/@rnmapbox/maps/android/build.gradle
+index dd8e6c6..8fca599 100644
+--- a/node_modules/@rnmapbox/maps/android/build.gradle
++++ b/node_modules/@rnmapbox/maps/android/build.gradle
+@@ -33,11 +33,19 @@ buildscript {
+ 
+   ext {
+     rnmapboxDefaultKotlinVersion = '1.7.21'
++
++    buildToolsVersion = "34.0.0"
++    minSdkVersion = 21
++    compileSdkVersion = 34
++    targetSdkVersion = 34
++    // Update AGP to 8.3.1 or higher
++    agpVersion = "8.3.1"
+   }
+ 
+   project.ext.set("kotlinVersion", rootProject.ext.has('kotlinVersion') ? rootProject.ext.get('kotlinVersion') : rnmapboxDefaultKotlinVersion)
+   dependencies {
+-      classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.kotlinVersion}"
++    //   classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${project.kotlinVersion}"
++    classpath "com.android.tools.build:gradle:${agpVersion}"
+   }
+ }
+ 
+@@ -57,14 +65,14 @@ android {
+         namespace = "com.rnmapbox.rnmbx"
+     }
+     if (safeExtGet("RNMapboxMapsImpl", defaultMapboxMapsImpl) == "maplibre") {
+-        msg = '@rnmapbox/maps: Maplibre implementation has been removed, set RNMapboxMapsImpl to mapbox- see https://github.com/rnmapbox/maps/wiki/Deprecated-RNMapboxImpl-Maplibre#android'
+-        logger.error(msg)
+-        throw new GradleException(msg)
++        // msg = '@rnmapbox/maps: Maplibre implementation has been removed, set RNMapboxMapsImpl to mapbox- see https://github.com/rnmapbox/maps/wiki/Deprecated-RNMapboxImpl-Maplibre#android'
++        logger.error("error")
++        throw new GradleException("error")
+     }
+     else if (safeExtGet("RNMapboxMapsImpl", defaultMapboxMapsImpl) == "mapbox-gl") {
+-        msg = '@rnmapbox/maps: MapboxGL implementation is DEPRECATED has been removed, set RNMapboxMapsImpl to mapbox  - see https://github.com/rnmapbox/maps/wiki/Deprecated-RNMapboxImpl-Maplibre#android'
+-        logger.error(msg)
+-        throw new GradleException(msg)
++        // msg = '@rnmapbox/maps: MapboxGL implementation is DEPRECATED has been removed, set RNMapboxMapsImpl to mapbox  - see https://github.com/rnmapbox/maps/wiki/Deprecated-RNMapboxImpl-Maplibre#android'
++        logger.error("error")
++        throw new GradleException("error")
+     }
+     else if (safeExtGet("RNMapboxMapsImpl", defaultMapboxMapsImpl) == "mapbox") {
+         sourceSets {
